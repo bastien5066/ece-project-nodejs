@@ -1,0 +1,168 @@
+body {
+    background-image: url("https://i.pinimg.com/originals/f3/8e/18/f38e1822bbfa446f9ccc75a875c454be.gif");
+    background-attachment: fixed;
+    background-size: auto 105%;
+}
+
+.title {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 5em;
+    text-shadow: 1px 2px 2px white;
+    letter-spacing: 5px;
+    margin: 0 auto;
+}
+
+#title-img {
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.header-authentificate {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.sign-up,
+.sign-in {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+.sign-in .header,
+.sign-up .header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.sign-up {
+    background-color: black;
+    border: 2px white solid;
+    border-radius: 30px;
+}
+
+.sign-up .header {
+    color: white;
+}
+
+.sign-in .header {
+    color: black;
+}
+
+.sign-in {
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 30px;
+}
+
+.form-authentificate {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.sign-in-form,
+.sign-up-form {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.sign-in-form {
+    display: none;
+    width: 50%;
+    color: black;
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+
+.sign-up-form {
+    display: none;
+    width: 50%;
+    color: white;
+    background-color: black;
+    border: 2px white solid;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+
+.form-info {
+    margin: 5% 5% 5% 5%;
+    text-align: center;
+}
+
+.form-ico {
+    vertical-align: middle;
+    height: 30px;
+    margin-right: 1%;
+}
+
+#reverse-ico {
+    filter: invert(100%);
+}
+
+.form-submit {
+    margin-top: 5%;
+    font-size: 1.3em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.form-element {
+    margin-top: 5%;
+}
+
+#form-button-sign-in {
+    background-color: black;
+    color: white;
+}
+
+#form-button-sign-up {
+    background-color: white;
+    color: black;
+}
+
+#form-button-sign-up:hover,
+#form-button-sign-in:hover {
+    background-color: blue
+}
+
+#form-button-sign-up:hover {
+    color: white;
+}
+
+.msg-error,
+.msg-success {
+    text-align: center;
+    width: 50%;
+    color: white;
+    margin: 0 auto;
+    margin-top: 5%;
+    border: 5px white solid;
+}
+
+.msg-success {
+    background-color: green;
+}
+
+.msg-error {
+    background-color: red;
+}
+
+.msg-error-txt,
+.msg-success-txt {
+    padding: 3%;
+    font-size: 1.3em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

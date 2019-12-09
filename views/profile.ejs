@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>XtreMetrics - Profile</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/profile.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <div class="logo">
+            <img id="logo-img" src="/img/X-icon.png" />
+            <span id="logo">TREMETRICS</span>
+        </div>
+        <a class="active" href="/logout"><span>LogOut</span></a>
+        <a class="active" href="/user/delete"><span>Delete account</span></a>
+    </div>
+    <%if(err === undefined && msg === undefined){ %>
+        <div class="title">
+            <span id="title">Welcome <span class="txt-highlight"><%= userName %></span> ! </span>
+        </div>
+        <% } %>
+            <section class="header-option">
+                <div class="profile">
+                    <div id="profile" class="header">Profile</div>
+                </div>
+                <div class="metrics">
+                    <div id="metrics" class="header">Metrics</div>
+                </div>
+            </section>
+            <%if(err && msg !== undefined){ %>
+                <section class="msg-error">
+                    <div class="msg-error-txt">
+                        <%= msg %>
+                    </div>
+                </section>
+                <% } else if(!err && msg !== undefined) {%>
+                    <section class="msg-success">
+                        <div class="msg-success-txt">
+                            <%= msg %>
+                        </div>
+                    </section>
+                    <% } %>
+                        <section class="content">
+                            <div class="profile-form">
+                                <form class="form-info" action="/user/<%= userName %>/profile" method="post">
+                                    <div class="form-title" id="form-title-white"><span class="form-title-txt">Edit your profile</span></div>
+                                    <div class="form-element">
+                                        <img id="reverse-ico" class="form-ico" src="/img/email.png" />
+                                        <input type="mail" id="mail" name="user_mail" placeholder="Enter your e-mail" value="<%= userEmail %>" required>
+                                    </div>
+                                    <div class="form-element">
+                                        <img id="reverse-ico" class="form-ico" src="/img/user.png" />
+                                        <input type="text" id="name" name="user_name" placeholder="Enter your username" value="<%= userName %>" required>
+                                    </div>
+                                    <div class="form-element" id="hover">
+                                        <img id="reverse-ico" class="form-ico" src="/img/psw.png" />
+                                        <input type="password" id="password" name="user_password" placeholder="Enter your password" value="<%= userPassword %>" required>
+                                    </div>
+                                    <button id="form-button-profile" type="submit" class="form-submit">Save</button>
+                                </form>
+                            </div>
+                            <div class="metrics-div">
+                                <div class="form-info">
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">My metrics</span></div>
+                                    <div class="list-button">
+                                        <button class="btn-choice"> Create </button>
+                                        <button class="btn-choice"> Read </button>
+                                        <button class="btn-choice"> Update </button>
+                                        <button class="btn-choice"> Delete </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <script>
+                            $(document).ready(function() {
+                                $(".title").fadeTo(5000, 0.001, function() {
+                                    $(this).slideUp(500, function() {
+                                        $(this).remove();
+                                    });
+                                });
+                                $("#password").click(function() {
+                                    if ($(this).attr("type") === 'password') {
+                                        $(this).prop("type", "text");
+                                        $(this).css("background-image", "url(../img/visibility.png)");
+                                    } else {
+                                        $(this).prop("type", "password");
+                                        $(this).css("background-image", "url(../img/no-visibility.png)");
+                                    }
+                                });
+                                $(".profile").click(function() {
+                                    $('.metrics').toggle(500);
+                                    $('.profile-form').toggle(500);
+                                });
+                                $(".metrics").click(function() {
+                                    $('.profile').toggle(500);
+                                    $('.metrics-div').toggle(500);
+                                });
+                                $(".msg-error").fadeTo(6000, 5, function() {
+                                    $(this).slideUp(500, function() {
+                                        $(this).remove();
+                                    });
+                                });
+                                $(".msg-success").fadeTo(6000, 5, function() {
+                                    $(this).slideUp(500, function() {
+                                        $(this).remove();
+                                    });
+                                });
+
+                            });
+                        </script>
+</body>
+
+</html>

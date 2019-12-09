@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>XtreMetrics - Login</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/homepage.css">
+</head>
+
+<body>
+    <div class="title">
+        <img id="title-img" src="/img/X-icon.png" />
+        <span id="title">TREMETRICS</span>
+    </div>
+    <%if(err && msg !== undefined){ %>
+        <section class="msg-error">
+            <div class="msg-error-txt">
+                <%= msg %>
+            </div>
+        </section>
+        <% } else if(!err && msg !== undefined) {%>
+            <section class="msg-success">
+                <div class="msg-success-txt">
+                    <%= msg %>
+                </div>
+            </section>
+            <% } %>
+                <section class="header-authentificate">
+                    <div class="sign-up">
+                        <div id="sign-up" class="header">Sign up</div>
+                    </div>
+
+                    <div class="sign-in">
+                        <div id="sign-in" class="header">Sign in</div>
+                    </div>
+                </section>
+                <section class="form-authentificate">
+                    <div class="sign-up-form">
+                        <form class="form-info" action="/sign-up" method="post">
+                            <div class="form-element">
+                                <img id="reverse-ico" class="form-ico" src="/img/email.png" />
+                                <input type="mail" id="mail" name="user_mail" placeholder="Enter your e-mail" required>
+                            </div>
+                            <div class="form-element">
+                                <img id="reverse-ico" class="form-ico" src="/img/user.png" />
+                                <input type="text" id="name" name="user_name" placeholder="Enter your username" required>
+                            </div>
+                            <div class="form-element">
+                                <img id="reverse-ico" class="form-ico" src="/img/psw.png" />
+                                <input type="password" id="password" name="user_password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="form-element">
+                                <img id="reverse-ico" class="form-ico" src="/img/confirm_psw.png" />
+                                <input type="password" id="confirm_password" name="user_confirm_password" placeholder="Confirm your password" required>
+                            </div>
+                            <button id="form-button-sign-up" type="submit" class="form-submit">
+                    Sign-up
+                </button>
+                        </form>
+                    </div>
+                    <div class="sign-in-form">
+                        <form class="form-info" action="/sign-in" method="post">
+                            <div class="form-element">
+                                <img class="form-ico" src="/img/email.png" />
+                                <input type="mail" id="mail" name="user_mail" placeholder="Enter your e-mail" required>
+                            </div>
+                            <div class="form-element">
+                                <img class="form-ico" src="/img/psw.png" />
+                                <input type="password" id="password" name="user_password" placeholder="Enter your password" required>
+                            </div>
+                            <button id="form-button-sign-in" type="submit" class="form-submit">
+                        Sign-in
+                    </button>
+                        </form>
+                    </div>
+                </section>
+
+
+                <script>
+                    $(document).ready(function() {
+                        $(".sign-up").click(function() {
+                            $('.sign-in').toggle(500);
+                            $('.sign-up-form').toggle(500);
+                        });
+                        $(".sign-in").click(function() {
+                            $('.sign-up').toggle(500);
+                            $('.sign-in-form').toggle(500);
+                        });
+                        $(".msg-error").fadeTo(6000, 5, function() {
+                            $(this).slideUp(500, function() {
+                                $(this).remove();
+                            });
+                        });
+                        $(".msg-success").fadeTo(6000, 5, function() {
+                            $(this).slideUp(500, function() {
+                                $(this).remove();
+                            });
+                        });
+
+                    });
+                </script>
+</body>
+
+</html>
