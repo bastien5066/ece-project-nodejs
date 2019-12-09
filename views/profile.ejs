@@ -42,7 +42,7 @@
                         </div>
                     </section>
                     <% } %>
-                        <section class="content">
+                        <section class="option">
                             <div class="profile-form">
                                 <form class="form-info" action="/user/<%= userName %>/profile" method="post">
                                     <div class="form-title" id="form-title-white"><span class="form-title-txt">Edit your profile</span></div>
@@ -61,18 +61,48 @@
                                     <button id="form-button-profile" type="submit" class="form-submit">Save</button>
                                 </form>
                             </div>
-                            <div class="metrics-div">
+                            <div class="metrics-action">
                                 <div class="form-info">
-                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">My metrics</span></div>
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Action on metrics</span></div>
                                     <div class="list-button">
-                                        <button class="btn-choice"> Create </button>
-                                        <button class="btn-choice"> Read </button>
-                                        <button class="btn-choice"> Update </button>
-                                        <button class="btn-choice"> Delete </button>
+                                        <button title="Display options metrics" class="btn-choice" id="btn-settings"></button>
+                                        <button title="Create metric" class="btn-choice" id="btn-create"></button>
+                                        <button title="Read metric" class="btn-choice" id="btn-read"></button>
+                                        <button title="Update metric" class="btn-choice" id="btn-update"></button>
+                                        <button title="Delete metric" class="btn-choice" id="btn-delete"></button>
                                     </div>
                                 </div>
                             </div>
                         </section>
+                        <section class="option-metrics">
+                            <div class="metrics-create" id="option-metrics-create">
+                                <div class="form-info">
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Create metrics</span></div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="option-metrics">
+                            <div class="metrics-read" id="option-metrics-read">
+                                <div class="form-info">
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Read metrics</span></div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="option-metrics">
+                            <div class="metrics-update" id="option-metrics-update">
+                                <div class="form-info">
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Update metrics</span></div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="option-metrics">
+                            <div class="metrics-delete" id="option-metrics-delete">
+                                <div class="form-info">
+                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Delete metrics</span></div>
+                                </div>
+                            </div>
+                        </section>
+
 
                         <script>
                             $(document).ready(function() {
@@ -96,7 +126,7 @@
                                 });
                                 $(".metrics").click(function() {
                                     $('.profile').toggle(500);
-                                    $('.metrics-div').toggle(500);
+                                    $('.metrics-action').toggle(500);
                                 });
                                 $(".msg-error").fadeTo(6000, 5, function() {
                                     $(this).slideUp(500, function() {
@@ -107,6 +137,32 @@
                                     $(this).slideUp(500, function() {
                                         $(this).remove();
                                     });
+                                });
+                                $("#btn-settings").click(function() {
+                                    $("#btn-settings").toggleClass("rotate");
+                                    $(".metrics-create").hide("slow");
+                                    $(".metrics-read").hide("slow");
+                                    $(".metrics-update").hide("slow");
+                                    $(".metrics-delete").hide("slow");
+                                });
+                                $("#btn-settings").click(function() {
+                                    $('#btn-create').toggle(500);
+                                    $('#btn-read').toggle(500);
+                                    $('#btn-update').toggle(500);
+                                    $('#btn-delete').toggle(500);
+                                });
+
+                                $("#btn-create").click(function() {
+                                    $(".metrics-create").toggle(500);
+                                });
+                                $("#btn-read").click(function() {
+                                    $(".metrics-read").toggle(500);
+                                });
+                                $("#btn-update").click(function() {
+                                    $(".metrics-update").toggle(500);
+                                });
+                                $("#btn-delete").click(function() {
+                                    $(".metrics-delete").toggle(500);
                                 });
 
                             });

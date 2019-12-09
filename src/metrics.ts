@@ -3,12 +3,26 @@ import WriteStream from 'level-ws'
 
 
 export class Metric {
-  public timestamp: string
-  public value: number
+  private timestamp: string
+  private height: number
+  private weight: number
 
-  constructor(ts: string, v: number) {
+  constructor(ts: string, hgt: number, wgt: number) {
     this.timestamp = ts
-    this.value = v
+    this.height = hgt
+    this.weight = wgt
+  }
+
+  public getTimestamp() {
+    return this.timestamp;
+  }
+
+  public getHeight() {
+    return this.height;
+  } 
+
+  public getWeight() {
+    return this.weight;
   }
 }
 
@@ -24,19 +38,18 @@ export class MetricsHandler {
     stream.on('error', callback)
     stream.on('close', callback)
     metrics.forEach((m: Metric) => {
-      stream.write({ key: `${keyUser}:${m.timestamp}`, value: `${m.timestamp}:${m.value}` })
+      stream.write({ key: `${keyUser}:${m.getTimestamp()}`, value: `${m.getTimestamp()}:${m.getHeight()}:${m.getWeight()}` })
     })
     stream.end()
   }
 
   public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => Metric[]) {
     // Read
-
     let metrics: Metric[] = []
     this.db.createReadStream()
       .on('data', function (data) {
         if (data.key.includes(keyUser)) {
-          let oneMetric: Metric = new Metric(data.value.split(':')[0], data.value.split(':')[1])
+          let oneMetric: Metric = new Metric(data.value.split(':')[0], data.value.split(':')[1], data.value.split(':')[2])
           metrics.push(oneMetric)
         }
       })
@@ -57,13 +70,13 @@ export class MetricsHandler {
     console.log("metrics.forEach")
     console.log(metrics)
     metrics.forEach((m: Metric) => {
-      this.db.del(`${keyUser}:${m.timestamp}`, function (err) {
+      this.db.del(`${keyUser}:${m.getTimestamp()}`, function (err) {
         if (err) {
           callback(err)
         }
         else {         
           console.log("deleted")
-          console.log(`${keyUser}:${m.timestamp}`)
+          console.log(`${keyUser}:${m.getTimestamp()}`)
           callback(null)
   
         }

@@ -134,7 +134,7 @@
             letter-spacing: 5px;
         }
         
-        .content {
+        .option {
             display: flex;
             width: 50%;
             margin: 0 auto;
@@ -142,12 +142,20 @@
         }
         
         .profile-form,
-        .metrics-div {
+        .metrics-action,
+        .metrics-create,
+        .metrics-read,
+        .metrics-update,
+        .metrics-delete {
             display: none;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
         
-        .metrics-div {
+        .metrics-action,
+        .metrics-create,
+        .metrics-read,
+        .metrics-update,
+        .metrics-delete {
             width: 80%;
             color: black;
             background-color: white;
@@ -266,14 +274,72 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
         
-        .list-button .btn-choice {
-            padding: 1% 4% 1% 4%;
+        .btn-choice {
+            width: 50px;
+            height: 50px;
+            background: none;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 1em;
             margin-right: 1%;
             margin-left: 1%;
+            border: none;
+            background-size: cover;
         }
         
-        .list-button .btn-choice:hover {
+        .btn-choice:hover {
             cursor: pointer;
+            width: 60px;
+            height: 60px;
+        }
+        
+        #btn-read {
+            background-image: url('../img/btn-read.png');
+            display: none;
+        }
+        
+        #btn-create {
+            background-image: url('../img/btn-create.png');
+            display: none;
+        }
+        
+        #btn-delete {
+            background-image: url('../img/btn-delete.png');
+            display: none;
+        }
+        
+        #btn-update {
+            background-image: url('../img/btn-update.png');
+            display: none;
+        }
+        
+        #btn-settings {
+            background-image: url('../img/btn-settings.png');
+        }
+        
+        .rotate {
+            -webkit-transform: rotate(360deg);
+            -webkit-transition-duration: 1s;
+        }
+        
+        .option-metrics {
+            display: flex;
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 5%;
+        }
+        
+        #option-metrics-create {
+            background-color: green;
+        }
+        
+        #option-metrics-read {
+            background-color: #FFBF00;
+        }
+        
+        #option-metrics-update {
+            background-color: #008B8B;
+        }
+        
+        #option-metrics-delete {
+            background-color: red;
         }
