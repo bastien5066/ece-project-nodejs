@@ -26,7 +26,6 @@
         "@types/node": "^12.12.14",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.4",
-        "d3": "^5.14.2",
         "ejs": "^3.0.1",
         "encoding-down": "^6.3.0",
         "express": "^4.17.1",
@@ -43,6 +42,7 @@
         "bl": ">=0.9.5"
     },
     "dependencies": {
+        "chart.js": "^2.9.3",
         "express-mysql-session": "^2.1.0",
         "level": "^6.0.0",
         "level-session-store": "^2.2.0"
