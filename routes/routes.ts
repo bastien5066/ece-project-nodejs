@@ -149,32 +149,22 @@ function editProfile(req: any, res: any) {
                 } else {
                     console.log('callback result is null')
                 }
-                console.log("TABLE")
-                console.log(email)
                 if (email.length != 0) {
                     res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
                     res.end()
                 } else {
-
-                    console.log("HERRRE WE GO ||||")
                     db.remove(req.session.user.email, (err: Error | null) => {
                         if (err) throw err
                         else {
                             console.log("**********************************")
                             db.add([newUser], (err: Error | null) => {
                                 if (err) throw err
-                                else {
-                                    console.log("donnnnnne")
-                                }
                             })
                         }
                     });
-
                     req.session.user = newUser;
                     res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: newUser.getMetrics(), err: false, msg: "Your account has successfully been modified !" })
-
                 }
-
             }
         });
     }
@@ -207,6 +197,15 @@ function createMetric(req: any, res: any) {
 
 function updateMetric(req: any, res: any) {
     console.log("UPDATE METRIC")
+    console.log(req.body)
+    var timestamp = req.params.id.split('_')[2]
+    db.updateUserMetric(req.params.id, new Metric(timestamp, req.body.metric_height, req.body.metric_weight), (err: Error | null) => {
+        if (err) throw err
+        else {
+            console.log("updated !")
+        }
+    })
+    res.status(204).send()
 }
 
 function deleteMetric(req: any, res: any) {

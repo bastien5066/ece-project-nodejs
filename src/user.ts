@@ -140,7 +140,7 @@ export class UserHandler {
       if (!err) {
         if (result != undefined && result != null) {
           let metrics: Metric[] = result.getMetrics()
-          this.db.del(`user:${result.getEmail()}`, function (err) {
+          this.db.del(`user_${result.getEmail()}`, function (err) {
             if (err) {
               callback(err)
             }
@@ -161,7 +161,7 @@ export class UserHandler {
     });
   }
 
-  public addUserMetric(keyUser: string, metric:Metric, callback: (error: Error | null) => void) {
+  public addUserMetric(keyUser: string, metric: Metric, callback: (error: Error | null) => void) {
     this.metricsDB.add(keyUser, [metric], (err: Error | null) => {
       if (err) throw err
       else {
@@ -174,6 +174,13 @@ export class UserHandler {
 
   public removeUserMetric(keyMetric: string, callback: (error: Error | null) => void) {
     this.metricsDB.removeOne(keyMetric, (err: Error | null, result: Metric[] | null) => {
+      if (err) throw err
+      else console.log("DONE DELETING")
+    });
+  }
+
+  public updateUserMetric(keyMetric: string, newMetric: Metric, callback: (error: Error | null) => void) {
+    this.metricsDB.updateOne(keyMetric, newMetric, (err: Error | null, result: Metric[] | null) => {
       if (err) throw err
       else console.log("DONE DELETING")
     });

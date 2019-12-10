@@ -19,7 +19,7 @@ export class Metric {
 
   public getHeight() {
     return this.height;
-  } 
+  }
 
   public getWeight() {
     return this.weight;
@@ -48,8 +48,6 @@ export class MetricsHandler {
     let metrics: Metric[] = []
     this.db.createReadStream()
       .on('data', function (data) {
-        console.log("DATA")
-        console.log(data)
         if (data.key.includes(keyUser)) {
           let oneMetric: Metric = new Metric(data.value.split('_')[0], data.value.split('_')[1], data.value.split('_')[2])
           metrics.push(oneMetric)
@@ -76,27 +74,37 @@ export class MetricsHandler {
         if (err) {
           callback(err)
         }
-        else {         
+        else {
           console.log("deleted")
           console.log(`${keyUser}_${m.getTimestamp()}`)
           callback(null)
-  
+
         }
       });
     })
-  
+
   }
   public removeOne(keyMetric: string, callback: (error: Error | null) => void) {
-      this.db.del(keyMetric, function (err) {
-        if (err) {
-          callback(err)
-        }
-        else {         
-          console.log("deleted")
-          console.log(keyMetric)
-          callback(null)
-  
-        }
-      });  
+    this.db.del(keyMetric, function (err) {
+      if (err) {
+        callback(err)
+      }
+      else {
+        console.log("deleted")
+        console.log(keyMetric)
+        callback(null)
+
+      }
+    });
+  }
+
+  public updateOne(keyMetric: string, newMetric:Metric, callback: (error: Error | null) => void) {
+    const stream = WriteStream(this.db)
+    stream.on('error', callback)
+    stream.on('close', callback)   
+    console.log("KEY")
+    console.log(keyMetric)
+    stream.write({ key: keyMetric, value: `${newMetric.getTimestamp()}_${newMetric.getHeight()}_${newMetric.getWeight()}` })
+    stream.end()
   }
 }
