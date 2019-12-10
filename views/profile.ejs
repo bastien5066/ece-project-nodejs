@@ -2,19 +2,22 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>XtreMetrics - Profile</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.1/d3.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/profile.css">
 </head>
 
 <body>
+
     <div class="topnav">
         <div class="logo">
             <img id="logo-img" src="/img/X-icon.png" />
             <span id="logo">TREMETRICS</span>
         </div>
         <a class="active" href="/logout"><span>LogOut</span></a>
-        <a class="active" href="/user/delete"><span>Delete account</span></a>
+        <a class="active" href="/user/<%=userName%>/profile/delete"><span>Delete account</span></a>
     </div>
     <%if(err === undefined && msg === undefined){ %>
         <div class="title">
@@ -44,7 +47,7 @@
                     <% } %>
                         <section class="option">
                             <div class="profile-form">
-                                <form class="form-info" action="/user/<%= userName %>/profile" method="post">
+                                <form class="form-info" action="/user/<%= userName %>/profile/edit" method="post">
                                     <div class="form-title" id="form-title-white"><span class="form-title-txt">Edit your profile</span></div>
                                     <div class="form-element">
                                         <img id="reverse-ico" class="form-ico" src="/img/email.png" />
@@ -77,35 +80,114 @@
                         <section class="option-metrics">
                             <div class="metrics-create" id="option-metrics-create">
                                 <div class="form-info">
-                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Create metrics</span></div>
+                                    <div class="form-title" id="form-title-white"><span class="form-title-txt">Create metrics</span></div>
+                                    <form class="form-info" action="/user/<%= userName %>/metrics/create" method="post">
+                                        <div class="form-element">
+                                            <img id="reverse-ico" class="form-ico" src="/img/metric-height.png" />
+                                            <input type="height" id="weight" name="metric_height" placeholder="Enter the new height" required>
+                                        </div>
+                                        <div class="form-element">
+                                            <img id="reverse-ico" class="form-ico" src="/img/metric-weight.png" />
+                                            <input type="height" id="weight" name="metric_weight" placeholder="Enter the new weight" required>
+                                        </div>
+                                        <button id="form-button-metrics" type="submit" class="form-submit">Save</button>
+                                    </form>
                                 </div>
                             </div>
                         </section>
                         <section class="option-metrics">
                             <div class="metrics-read" id="option-metrics-read">
                                 <div class="form-info">
-                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Read metrics</span></div>
+                                    <div class="form-title" id="form-title-white"><span class="form-title-txt">Read metrics</span></div>
+                                    <div>
+                                        <div id="my-chart"></div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
                         <section class="option-metrics">
                             <div class="metrics-update" id="option-metrics-update">
                                 <div class="form-info">
-                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Update metrics</span></div>
+                                    <div class="form-title" id="form-title-white"><span class="form-title-txt">Update metrics</span></div>
+                                    <div id="filter-update">
+                                        <form id="deleteForm" method="POST">
+                                            <input name="idfilter" id="idfilter-update" type="text" />
+                                            <input type="submit" value="" src="/img/search.png" id="search" width="30px">
+                                            <input name="mail" id="mail" value="<%= userEmail %>" type="hidden" />
+                                        </form>
+                                    </div>
+                                    <div id="metrics-update"></div>
                                 </div>
                             </div>
                         </section>
                         <section class="option-metrics">
                             <div class="metrics-delete" id="option-metrics-delete">
                                 <div class="form-info">
-                                    <div class="form-title" id="form-title-black"><span class="form-title-txt">Delete metrics</span></div>
+                                    <div class="form-title" id="form-title-white"><span class="form-title-txt">Delete metrics</span></div>
+                                    <div id="filter-delete">
+                                        <form id="deleteForm" method="POST">
+                                            <input name="idfilter" id="idfilter-delete" type="text" />
+                                            <input type="submit" value="" src="/img/search.png" id="search" width="30px">
+                                            <input name="mail" id="mail" value="<%= userEmail %>" type="hidden" />
+                                        </form>
+                                    </div>
+                                    <div id="metrics-delete"></div>
                                 </div>
                             </div>
                         </section>
-
-
+                        <script type="text/javascript" src="barchart.js"></script>
                         <script>
                             $(document).ready(function() {
+                                // Sample dataset. In a real application, you will probably get this data from another source such as AJAX.
+                                var dataset = [2, 5, 10, 15]
+
+                                // Sizing variables for our chart. These are saved as variables as they will be used in calculations.
+                                var chartWidth = 300
+                                var chartHeight = 100
+                                var padding = 5
+
+                                // We want our our bars to take up the full height of the chart, so, we will apply a scaling factor to the height of every bar.
+                                var heightScalingFactor = chartHeight / getMax(dataset)
+
+                                // Here we are creating the SVG that will be our chart.
+                                var svg = d3
+                                    .select('#my-chart') // I'm starting off by selecting the container.
+                                    .append('svg') // Appending an SVG element to that container.
+                                    .attr('width', chartWidth) // Setting the width of the SVG.
+                                    .attr('height', chartHeight) // And setting the height of the SVG.
+
+                                // The next step is to create the rectangles that will make up the bars in our bar chart.
+                                svg
+                                    .selectAll('rect') // I'm selecting all of the rectangles in the SVG (note that at this point, there actually aren't any, but we'll be creating them in a couple of steps).
+                                    .data(dataset) // Then I'm mapping the dataset to those rectangles.
+                                    .enter() // This step is important in that it allows us to dynamically create the rectangle elements that we selected previously.
+                                    .append('rect') // For each element in the dataset, append a new rectangle.
+                                    .attr('x', function(value, index) { // Set the X position of the rectangle by taking the index of the current item we are creating, multiplying it by the calculated width of each bar, and adding a padding value so we can see some space between bars.
+                                        return (index * (chartWidth / dataset.length)) + padding
+                                    })
+                                    .attr('y', function(value, index) { // Set the rectangle by subtracting the scaled height from the height of the chart (this has to be done becuase SVG coordinates start with 0,0 at their top left corner).
+                                        return chartHeight - (value * heightScalingFactor)
+                                    })
+                                    .attr('width', (chartWidth / dataset.length) - padding) // The width is dynamically calculated to have an even distribution of bars that take up the entire width of the chart.
+                                    .attr('height', function(value, index) { // The height is simply the value of the item in the dataset multiplied by the height scaling factor.
+                                        return value * heightScalingFactor
+                                    })
+                                    .attr('fill', 'blue') // Sets the color of the bars.
+
+                                /**
+                                 *  Gets the maximum value in a collection of numbers.
+                                 */
+                                function getMax(collection) {
+                                    var max = 0
+
+                                    collection.forEach(function(element) {
+                                        max = element > max ? element : max
+                                    })
+
+                                    return max
+                                }
+
+
                                 $(".title").fadeTo(5000, 0.001, function() {
                                     $(this).slideUp(500, function() {
                                         $(this).remove();
@@ -127,6 +209,11 @@
                                 $(".metrics").click(function() {
                                     $('.profile').toggle(500);
                                     $('.metrics-action').toggle(500);
+                                    $(".metrics-create").hide("slow");
+                                    $(".metrics-read").hide("slow");
+                                    $(".metrics-update").hide("slow");
+                                    $(".metrics-delete").hide("slow");
+
                                 });
                                 $(".msg-error").fadeTo(6000, 5, function() {
                                     $(this).slideUp(500, function() {
@@ -164,6 +251,20 @@
                                 $("#btn-delete").click(function() {
                                     $(".metrics-delete").toggle(500);
                                 });
+                                $('#search').click((e) => {
+                                    $('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete');
+                                    $('form#deleteForm').submit();
+                                    $("#metrics").empty();
+                                    e.preventDefault();
+                                    var txt = "";
+                                    $.getJSON("", {}, (data) => {
+                                        const content = data.map(d => {
+                                            txt += '<span id="txt-title">Timestamp:</span> ' + d.timestamp + ' <span id="txt-title">Value:</span> ' + d.value + '<br><br>';
+                                        })
+                                        html = $.parseHTML(txt);
+                                        $('#metrics').append(html);
+                                    });
+                                })
 
                             });
                         </script>

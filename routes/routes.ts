@@ -179,9 +179,23 @@ function editProfile(req: any, res: any) {
     }
 }
 
+function createMetric(req: any, res: any) {
+    console.log("CREATE METRIC")
+}
+
+
+function updateMetric(req: any, res: any) {
+    console.log("UPDATE METRIC")
+}
+
+function deleteMetric(req: any, res: any) {
+    console.log("DELETE METRIC")
+}
+
+
 function defaultGateway(req: any, res: any) {
     res.redirect('/login');
 }
 
 
-module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile }
+module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile, createMetric, updateMetric, deleteMetric }

@@ -328,6 +328,14 @@
             margin-top: 5%;
         }
         
+        #option-metrics-create,
+        #option-metrics-read,
+        #option-metrics-update,
+        #option-metrics-delete {
+            color: white;
+            border: 2px white solid;
+        }
+        
         #option-metrics-create {
             background-color: green;
         }
@@ -342,4 +350,41 @@
         
         #option-metrics-delete {
             background-color: red;
+        }
+        
+        #filter {
+            text-align: center;
+            padding-top: 1em;
+        }
+        
+        #filter input {
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0.5em 1em 0.5em 1em;
+        }
+        
+        #hide {
+            vertical-align: middle;
+            margin-left: 1em
+        }
+        
+        #search {
+            background: url("../img/search.png");
+            vertical-align: middle;
+            margin-left: 1%;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background-size: 30px 30px;
+            filter: invert(100%);
+        }
+        
+        #printForm input {
+            margin-left: 1em
+        }
+        
+        #search:hover,
+        #trash:hover,
+        #hide:hover {
+            cursor: pointer;
         }

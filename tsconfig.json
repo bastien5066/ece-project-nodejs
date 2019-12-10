@@ -65,7 +65,8 @@
     "src/**/*",
     "views/**/*",
     "routes/**/*",
-    "public/**/*"
+    "public/**/*", 
+    "graph/**/*"
   ],
   "exclude": [
     "node_modules",
