@@ -39,7 +39,8 @@
         "levelup": "^4.3.2",
         "nodemon": "^2.0.1",
         "ts-node": "^8.5.4",
-        "typescript": "^3.7.3"
+        "typescript": "^3.7.3",
+        "bl": ">=0.9.5"
     },
     "dependencies": {
         "express-mysql-session": "^2.1.0",
