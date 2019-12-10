@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="form-element">
                                             <img id="reverse-ico" class="form-ico" src="/img/metric-weight.png" />
-                                            <input type="number" min="1" max="999" d="weight" name="metric_weight" placeholder="Weight" required>kg
+                                            <input type="number" min="1" max="999" id="weight" name="metric_weight" placeholder="Weight" required>kg
                                         </div>
                                         <button id="form-button-metrics" type="submit" class="form-submit">Save</button>
                                     </form>
@@ -226,6 +226,15 @@
                                 });
                                 $("[type='number']").keypress(function(evt) {
                                     evt.preventDefault();
+                                });
+                                $("#form-button-metrics").click((e) => {
+                                    $.ajax({
+                                        url: '/user/<%= userName %>/metrics/create',
+                                        success: function(data) {
+                                            $("#weight").val("");
+                                            $("#height").val("");
+                                        }
+                                    });
                                 });
                                 $(".trash").live('click', function() {
                                     var paramID = $(this).attr("id");

@@ -194,15 +194,11 @@ function printMetrics(req: any, res: any) {
 }
 
 function createMetric(req: any, res: any) {
-    console.log("CREATE METRIC")
-    console.log(req.body)
-    var timestamp = new Date().toLocaleDateString().replace('/','-').replace('/','-') + "~" + new Date().toLocaleTimeString()
-    console.log(timestamp)
-    db.addUserMetric('metrics_' + req.session.user.email, new Metric(timestamp, req.body.metric_height, req.body.metric_weight,), (err: Error | null) => {
+    var timestamp = new Date().toLocaleDateString().replace('/', '-').replace('/', '-') + "~" + new Date().toLocaleTimeString()
+    db.addUserMetric('metrics_' + req.session.user.email, new Metric(timestamp, req.body.metric_height, req.body.metric_weight), (err: Error | null) => {
         if (err) throw err
         else {
             console.log("done")
-
         }
     })
     res.status(204).send()
