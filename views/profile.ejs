@@ -145,6 +145,41 @@
                         <script type="text/javascript" src="/barchart.js"></script>
                         <script>
                             $(document).ready(function() {
+
+                                function refreshDelete(path) {
+                                    $("#metrics-delete").empty();
+                                    var request = $.getJSON(path, function(data) {
+                                        var txt = '';
+                                        data.forEach(function(element) {
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics:<%=userEmail%>:' + element.timestamp + '" class="trash" width="30px"><br>';
+                                        });
+                                        html = $.parseHTML(txt);
+                                        $('#metrics-delete').append(html);
+                                    }).fail(function(request, status, error) {
+                                        console.log('error', status, error)
+                                    }).always(function() {
+                                        console.log("complete");
+                                    });
+                                }
+
+                                function refreshUpdate(path) {
+                                    $("#metrics-update").empty();
+                                    var request = $.getJSON(path, function(data) {
+                                        var txt = '';
+                                        data.forEach(function(element) {
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<br>';
+                                        });
+                                        html = $.parseHTML(txt);
+                                        $('#metrics-update').append(html);
+                                    }).fail(function(request, status, error) {
+                                        console.log('error', status, error)
+                                    }).always(function() {
+                                        console.log("complete");
+                                    });
+
+                                }
+
+
                                 $(".title").fadeTo(5000, 0.001, function() {
                                     $(this).slideUp(500, function() {
                                         $(this).remove();
@@ -240,67 +275,21 @@
                                     var paramID = $(this).attr("id");
                                     $('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete/' + paramID);
                                     $('form#deleteForm').submit();
-                                    var request = $.getJSON("/user/<%= userName %>/metrics/delete/" + paramID, function(data) {
-                                        $("#metrics-delete").empty();
-                                        e.preventDefault();
-                                        alert("in")
-                                        var txt = '';
-                                        data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics:<%=userEmail%>:' + element.timestamp + '" class="trash" width="30px"><br>';
-                                        });
-                                        html = $.parseHTML(txt);
-                                        $('#metrics-delete').append(html);
-                                    }).fail(function(request, status, error) {
-                                        console.log('error', status, error)
-                                    }).always(function() {
-                                        console.log("complete");
-                                    });
+                                    refreshDelete("/user/<%= userName %>/metrics/delete/" + paramID)
                                 });
-
-
-
-
-
-
 
                                 $('#search-delete').click((e) => {
                                     //$('form#printDeleteForm').attr('action', '/user/<%= userName %>/metrics/delete');
                                     //$('form#printDeleteForm').submit();
-                                    $("#metrics-delete").empty();
                                     e.preventDefault();
-                                    var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
-                                        var txt = '';
-                                        data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
-                                        });
-                                        html = $.parseHTML(txt);
-                                        $('#metrics-delete').append(html);
-                                    }).fail(function(request, status, error) {
-                                        console.log('error', status, error)
-                                    }).always(function() {
-                                        console.log("complete");
-                                    });
+                                    refreshDelete("/user/<%= userName %>/metrics/read");
                                 })
                                 $('#search-update').click((e) => {
                                     //$('form#printUpdateForm').attr('action', '/user/<%= userName %>/metrics/update');
                                     //$('form#printUpdateForm').submit();
-                                    $("#metrics-update").empty();
                                     e.preventDefault();
-                                    var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
-                                        var txt = '';
-                                        data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<br>';
-                                        });
-                                        html = $.parseHTML(txt);
-                                        $('#metrics-update').append(html);
-                                    }).fail(function(request, status, error) {
-                                        console.log('error', status, error)
-                                    }).always(function() {
-                                        console.log("complete");
-                                    });
-                                })
-
-
+                                    refreshUpdate("/user/<%= userName %>/metrics/read");
+                                });
                             });
                         </script>
 </body>
