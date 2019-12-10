@@ -84,11 +84,11 @@
                                     <form class="form-info" action="/user/<%= userName %>/metrics/create" method="post">
                                         <div class="form-element">
                                             <img id="reverse-ico" class="form-ico" src="/img/metric-height.png" />
-                                            <input type="height" id="height" name="metric_height" placeholder="Enter the new height" required>
+                                            <input type="number" min="1" max="999" id="height" name="metric_height" placeholder="Height" required>cm
                                         </div>
                                         <div class="form-element">
                                             <img id="reverse-ico" class="form-ico" src="/img/metric-weight.png" />
-                                            <input type="height" id="weight" name="metric_weight" placeholder="Enter the new weight" required>
+                                            <input type="number" min="1" max="999" d="weight" name="metric_weight" placeholder="Weight" required>kg
                                         </div>
                                         <button id="form-button-metrics" type="submit" class="form-submit">Save</button>
                                     </form>
@@ -117,8 +117,8 @@
                                             <input name="mail-update" id="mail-update" value="<%= userEmail %>" type="hidden" />
                                         </form>
                                     </div>
-                                    <form d="updateForm" method="POST">
-                                        <div id="metrics-delete"></div>
+                                    <form id="updateForm" method="POST">
+                                        <div id="metrics-update"></div>
                                     </form>
                                 </div>
                             </div>
@@ -135,9 +135,10 @@
                                             <input name="mail-delete" id="mail-delete" value="<%= userEmail %>" type="hidden" />
                                         </form>
                                     </div>
-                                    <form d="deleteForm" method="POST">
+                                    <form id="deleteForm" method="POST">
                                         <div id="metrics-delete"></div>
                                     </form>
+
                                 </div>
                             </div>
                         </section>
@@ -223,8 +224,28 @@
                                     }
                                     $('#metrics-update').toggle(500);
                                 });
+                                $("[type='number']").keypress(function(evt) {
+                                    evt.preventDefault();
+                                });
                                 $(".trash").live('click', function() {
-                                    console.log($(this).attr("id"));
+                                    var paramID = $(this).attr("id");
+                                    $('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete/' + paramID);
+                                    $('form#deleteForm').submit();
+                                    var request = $.getJSON("/user/<%= userName %>/metrics/delete/" + paramID, function(data) {
+                                        $("#metrics-delete").empty();
+                                        e.preventDefault();
+                                        alert("in")
+                                        var txt = '';
+                                        data.forEach(function(element) {
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics:<%=userEmail%>:' + element.timestamp + '" class="trash" width="30px"><br>';
+                                        });
+                                        html = $.parseHTML(txt);
+                                        $('#metrics-delete').append(html);
+                                    }).fail(function(request, status, error) {
+                                        console.log('error', status, error)
+                                    }).always(function() {
+                                        console.log("complete");
+                                    });
                                 });
 
 
@@ -241,7 +262,7 @@
                                     var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
                                         var txt = '';
                                         data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<img src="/img/trash.png" id="metrics:<%=userEmail%>:' + element.timestamp + '" class="trash" width="30px"><br>';
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
                                         });
                                         html = $.parseHTML(txt);
                                         $('#metrics-delete').append(html);
@@ -259,7 +280,7 @@
                                     var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
                                         var txt = '';
                                         data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<br>';
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<br>';
                                         });
                                         html = $.parseHTML(txt);
                                         $('#metrics-update').append(html);

@@ -38,7 +38,7 @@ export class MetricsHandler {
     stream.on('error', callback)
     stream.on('close', callback)
     metrics.forEach((m: Metric) => {
-      stream.write({ key: `${keyUser}:${m.getTimestamp()}`, value: `${m.getTimestamp()}:${m.getHeight()}:${m.getWeight()}` })
+      stream.write({ key: `${keyUser}_${m.getTimestamp()}`, value: `${m.getTimestamp()}_${m.getHeight()}_${m.getWeight()}` })
     })
     stream.end()
   }
@@ -48,8 +48,10 @@ export class MetricsHandler {
     let metrics: Metric[] = []
     this.db.createReadStream()
       .on('data', function (data) {
+        console.log("DATA")
+        console.log(data)
         if (data.key.includes(keyUser)) {
-          let oneMetric: Metric = new Metric(data.value.split(':')[0], data.value.split(':')[1], data.value.split(':')[2])
+          let oneMetric: Metric = new Metric(data.value.split('_')[0], data.value.split('_')[1], data.value.split('_')[2])
           metrics.push(oneMetric)
         }
       })
@@ -70,18 +72,31 @@ export class MetricsHandler {
     console.log("metrics.forEach")
     console.log(metrics)
     metrics.forEach((m: Metric) => {
-      this.db.del(`${keyUser}:${m.getTimestamp()}`, function (err) {
+      this.db.del(`${keyUser}_${m.getTimestamp()}`, function (err) {
         if (err) {
           callback(err)
         }
         else {         
           console.log("deleted")
-          console.log(`${keyUser}:${m.getTimestamp()}`)
+          console.log(`${keyUser}_${m.getTimestamp()}`)
           callback(null)
   
         }
       });
     })
   
+  }
+  public removeOne(keyMetric: string, callback: (error: Error | null) => void) {
+      this.db.del(keyMetric, function (err) {
+        if (err) {
+          callback(err)
+        }
+        else {         
+          console.log("deleted")
+          console.log(keyMetric)
+          callback(null)
+  
+        }
+      });  
   }
 }

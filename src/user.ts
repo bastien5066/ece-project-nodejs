@@ -43,8 +43,8 @@ export class UserHandler {
     stream.on('error', callback)
     stream.on('close', callback)
     users.forEach((m: User) => {
-      stream.write({ key: `user:${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
-      this.metricsDB.add(`metrics:${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
+      stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
+      this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) throw err
         else {
           console.log('Data populated')
@@ -61,7 +61,7 @@ export class UserHandler {
     stream.on('error', callback)
     stream.on('close', callback)
     users.forEach((m: User) => {
-      stream.write({ key: `user:${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
+      stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
     })
     stream.end()
   }
@@ -73,7 +73,7 @@ export class UserHandler {
     this.db.createReadStream()
       .on('data', function (data) {
         counter += 1;
-        self.getAllMetrics('metrics:' + data.value.email, (err: Error | null, result: Metric[] | null) => {
+        self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
           if (!err) {
             if (result != null) {
               users.push(new User(data.value.email, data.value.username, data.value.password, result))
@@ -104,9 +104,9 @@ export class UserHandler {
     let self = this.metricsDB;
     this.db.createReadStream()
       .on('data', function (data) {
-        let key = data.key.split(':')[1]
+        let key = data.key.split('_')[1]
         if (key == email) {
-          self.getAllMetrics('metrics:' + data.value.email, (err: Error | null, result: Metric[] | null) => {
+          self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
             if (!err) {
               if (result != null) {
                 foundUser = new User(data.value.email, data.value.username, data.value.password, result)
@@ -146,7 +146,7 @@ export class UserHandler {
             }
             else {
               if (metrics.length > 0) {
-                self.del('metrics:' + email, (err: Error | null, result: Metric[] | null) => {
+                self.del('metrics_' + email, (err: Error | null, result: Metric[] | null) => {
                   if (err) throw err
                   else console.log("DONE DELETING")
                 });
@@ -158,6 +158,24 @@ export class UserHandler {
       } else {
         callback(err)
       };
+    });
+  }
+
+  public addUserMetric(keyUser: string, metric:Metric, callback: (error: Error | null) => void) {
+    this.metricsDB.add(keyUser, [metric], (err: Error | null) => {
+      if (err) throw err
+      else {
+        console.log('Data added')
+        callback(null)
+      }
+    });
+  }
+
+
+  public removeUserMetric(keyMetric: string, callback: (error: Error | null) => void) {
+    this.metricsDB.removeOne(keyMetric, (err: Error | null, result: Metric[] | null) => {
+      if (err) throw err
+      else console.log("DONE DELETING")
     });
   }
 }

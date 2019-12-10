@@ -1,4 +1,5 @@
 import { User, UserHandler } from '../src/user'
+import { Metric } from '../src/metrics';
 
 const db = new UserHandler('./db/users')
 
@@ -185,6 +186,8 @@ function printMetrics(req: any, res: any) {
         if (err) throw err
         if (result != null) {
             console.log("SEND RESULTS")
+            console.log(result);
+            req.session.user = result;
             res.status(200).send(result.getMetrics())
         }
     });
@@ -192,6 +195,17 @@ function printMetrics(req: any, res: any) {
 
 function createMetric(req: any, res: any) {
     console.log("CREATE METRIC")
+    console.log(req.body)
+    var timestamp = new Date().toLocaleDateString().replace('/','-').replace('/','-') + "~" + new Date().toLocaleTimeString()
+    console.log(timestamp)
+    db.addUserMetric('metrics_' + req.session.user.email, new Metric(timestamp, req.body.metric_height, req.body.metric_weight,), (err: Error | null) => {
+        if (err) throw err
+        else {
+            console.log("done")
+
+        }
+    })
+    res.status(204).send()
 }
 
 
@@ -201,6 +215,17 @@ function updateMetric(req: any, res: any) {
 
 function deleteMetric(req: any, res: any) {
     console.log("DELETE METRIC")
+    console.log(req.params.id)
+    db.removeUserMetric(req.params.id, (err: Error | null) => {
+        if (err) throw err
+        else {
+            console.log("done")
+
+        }
+    })
+    console.log(req.session.user)
+    res.status(204).send()
+
 }
 
 

@@ -3,6 +3,7 @@
             background-attachment: fixed;
             background-size: auto 105%;
             margin: 0 auto;
+            margin-bottom: 2%;
         }
         
         .title {
@@ -220,6 +221,8 @@
             color: red;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 1em;
+            width: 70px;
+            margin-right: 0.5em;
         }
         
         #form-button-metrics {
