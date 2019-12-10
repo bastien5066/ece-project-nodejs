@@ -368,7 +368,13 @@
             margin-left: 1em
         }
         
-        #search {
+        #txt-title {
+            color: turquoise;
+            margin: 1% 1% 1% 1%;
+        }
+        
+        #search-update,
+        #search-delete {
             background: url("../img/search.png");
             vertical-align: middle;
             margin-left: 1%;
@@ -383,8 +389,19 @@
             margin-left: 1em
         }
         
-        #search:hover,
-        #trash:hover,
-        #hide:hover {
+        #search-delete:hover,
+        #search-update:hover {
+            cursor: pointer;
+        }
+        
+        #hide-delete,
+        #hide-update {
+            vertical-align: middle;
+            margin-left: 0.5em;
+            filter: invert(100%);
+        }
+        
+        #hide-delete:hover,
+        #hide-update:hover {
             cursor: pointer;
         }

@@ -140,7 +140,7 @@ function editProfile(req: any, res: any) {
                         console.log(element.email)
                         console.log("-- req.body.user_mail")
                         console.log(req.body.user_mail)
-                         if (element.email == req.body.user_mail && previousEmail != req.body.user_mail) {
+                        if (element.email == req.body.user_mail && previousEmail != req.body.user_mail) {
                             console.log("******ALREADY EXIST************")
                             email.push(element.email)
                         }
@@ -151,10 +151,10 @@ function editProfile(req: any, res: any) {
                 console.log("TABLE")
                 console.log(email)
                 if (email.length != 0) {
-                    res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })   
+                    res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
                     res.end()
                 } else {
-                   
+
                     console.log("HERRRE WE GO ||||")
                     db.remove(req.session.user.email, (err: Error | null) => {
                         if (err) throw err
@@ -163,7 +163,7 @@ function editProfile(req: any, res: any) {
                             db.add([newUser], (err: Error | null) => {
                                 if (err) throw err
                                 else {
-                                    console.log("donnnnnne")                                   
+                                    console.log("donnnnnne")
                                 }
                             })
                         }
@@ -171,12 +171,23 @@ function editProfile(req: any, res: any) {
 
                     req.session.user = newUser;
                     res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: newUser.getMetrics(), err: false, msg: "Your account has successfully been modified !" })
-                
+
                 }
 
             }
         });
     }
+}
+
+function printMetrics(req: any, res: any) {
+    console.log("PRINT METRICS")
+    db.getUser(req.session.user.email, (err: Error | null, result: User | null) => {
+        if (err) throw err
+        if (result != null) {
+            console.log("SEND RESULTS")
+            res.status(200).send(result.getMetrics())
+        }
+    });
 }
 
 function createMetric(req: any, res: any) {
@@ -198,4 +209,4 @@ function defaultGateway(req: any, res: any) {
 }
 
 
-module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile, createMetric, updateMetric, deleteMetric }
+module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile, createMetric, updateMetric, deleteMetric, printMetrics }

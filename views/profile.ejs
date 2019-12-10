@@ -110,9 +110,10 @@
                                 <div class="form-info">
                                     <div class="form-title" id="form-title-white"><span class="form-title-txt">Update metrics</span></div>
                                     <div id="filter-update">
-                                        <form id="deleteForm" method="POST">
+                                        <form id="updateForm" method="POST">
                                             <input name="idfilter" id="idfilter-update" type="text" />
-                                            <input type="submit" value="" src="/img/search.png" id="search" width="30px">
+                                            <input type="submit" value="" src="/img/search.png" id="search-update" width="30px">
+                                            <img src="/img/visibility.png" id="hide-update" width="30px">
                                             <input name="mail" id="mail" value="<%= userEmail %>" type="hidden" />
                                         </form>
                                     </div>
@@ -127,7 +128,8 @@
                                     <div id="filter-delete">
                                         <form id="deleteForm" method="POST">
                                             <input name="idfilter" id="idfilter-delete" type="text" />
-                                            <input type="submit" value="" src="/img/search.png" id="search" width="30px">
+                                            <input type="submit" value="" src="/img/search.png" id="search-delete" width="30px">
+                                            <img src="/img/visibility.png" id="hide-delete" width="30px">
                                             <input name="mail" id="mail" value="<%= userEmail %>" type="hidden" />
                                         </form>
                                     </div>
@@ -251,20 +253,59 @@
                                 $("#btn-delete").click(function() {
                                     $(".metrics-delete").toggle(500);
                                 });
-                                $('#search').click((e) => {
-                                    $('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete');
-                                    $('form#deleteForm').submit();
-                                    $("#metrics").empty();
+                                $('#hide-delete').click((e) => {
+                                    if (($('#metrics-delete').is(':visible'))) {
+                                        $('#hide-delete').attr("src", "/img/no-visibility.png");
+                                    } else {
+                                        $('#hide-delete').attr("src", "/img/visibility.png");
+                                    }
+                                    $('#metrics-delete').toggle(500);
+                                });
+                                $('#hide-update').click((e) => {
+                                    if (($('#metrics-update').is(':visible'))) {
+                                        $('#hide-update').attr("src", "/img/no-visibility.png");
+                                    } else {
+                                        $('#hide-update').attr("src", "/img/visibility.png");
+                                    }
+                                    $('#metrics-update').toggle(500);
+                                });
+                                $('#search-delete').click((e) => {
+                                    //$('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete');
+                                    //$('form#deleteForm').submit();
+                                    $("#metrics-delete").empty();
                                     e.preventDefault();
-                                    var txt = "";
-                                    $.getJSON("", {}, (data) => {
-                                        const content = data.map(d => {
-                                            txt += '<span id="txt-title">Timestamp:</span> ' + d.timestamp + ' <span id="txt-title">Value:</span> ' + d.value + '<br><br>';
-                                        })
+                                    var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
+                                        var txt = '';
+                                        data.forEach(function(element) {
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<br>';
+                                        });
                                         html = $.parseHTML(txt);
-                                        $('#metrics').append(html);
+                                        $('#metrics-delete').append(html);
+                                    }).fail(function(request, status, error) {
+                                        console.log('error', status, error)
+                                    }).always(function() {
+                                        console.log("complete");
                                     });
                                 })
+                                $('#search-update').click((e) => {
+                                    //$('form#updateForm').attr('action', '/user/<%= userName %>/metrics/update');
+                                    //$('form#updateForm').submit();
+                                    $("#metrics-update").empty();
+                                    e.preventDefault();
+                                    var request = $.getJSON("/user/<%= userName %>/metrics/read", function(data) {
+                                        var txt = '';
+                                        data.forEach(function(element) {
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<br>';
+                                        });
+                                        html = $.parseHTML(txt);
+                                        $('#metrics-update').append(html);
+                                    }).fail(function(request, status, error) {
+                                        console.log('error', status, error)
+                                    }).always(function() {
+                                        console.log("complete");
+                                    });
+                                })
+
 
                             });
                         </script>
