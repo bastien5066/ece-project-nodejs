@@ -32,7 +32,7 @@
         .attr('height', function(value, index) { // The height is simply the value of the item in the dataset multiplied by the height scaling factor.
             return value * heightScalingFactor
         })
-        .attr('fill', 'pink') // Sets the color of the bars.
+        .attr('fill', 'blue') // Sets the color of the bars.
 
     /**
      *  Gets the maximum value in a collection of numbers.
