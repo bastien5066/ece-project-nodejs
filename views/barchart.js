@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', function(e) {
     // Sample dataset. In a real application, you will probably get this data from another source such as AJAX.
     var dataset = [5, 10, 15, 20, 25]
 
@@ -47,4 +46,3 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
         return max
     }
-});
