@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "v12.13.0"
+services:
+  - leveldb
 env: 
-  - NODE_ENV = "dev"
+  - NODE_ENV = "development"
   - NODE_ENV = "test"
