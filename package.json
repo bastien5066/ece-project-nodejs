@@ -8,6 +8,7 @@
         "build": "./node_modules/.bin/tsc -p tsconfig.json",
         "start": "./node_modules/.bin/ts-node src/server.ts",
         "populate": "./node_modules/.bin/ts-node bin/populate.ts",
+        "test": "./node_modules/.bin/mocha -r ts-node/register test/**/*.test.ts",
         "dev": "./node_modules/.bin/nodemon"
     },
     "repository": {
@@ -21,10 +22,14 @@
     },
     "homepage": "https://github.com/bastien5066/ece-project-nodejs#readme",
     "devDependencies": {
+        "@types/chai": "^4.2.7",
         "@types/express": "^4.17.2",
         "@types/levelup": "^3.1.1",
+        "@types/mocha": "^5.2.7",
         "@types/node": "^12.12.14",
+        "bl": "^1.0.1",
         "body-parser": "^1.19.0",
+        "chai": "^4.2.0",
         "cookie-parser": "^1.4.4",
         "ejs": "^3.0.1",
         "encoding-down": "^6.3.0",
@@ -36,10 +41,10 @@
         "level-ws": "^2.0.0",
         "leveldown": "^5.4.1",
         "levelup": "^4.3.2",
+        "mocha": "^6.2.2",
         "nodemon": "^2.0.1",
         "ts-node": "^8.5.4",
-        "typescript": "^3.7.3",
-        "bl": ">=0.9.5"
+        "typescript": "^3.7.3"
     },
     "dependencies": {
         "chart.js": "^2.9.3",
