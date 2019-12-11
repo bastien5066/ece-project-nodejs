@@ -446,3 +446,16 @@
     .chart {
         margin-bottom: 5%;
     }
+    
+    #idfilter_height_delete,
+    #idfilter_weight_delete,
+    #idfilter_height_update,
+    #idfilter_weight_update {
+        width: 70px;
+    }
+    
+    #setFilterDelete input,
+    #setFilterUpdate input {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: green;
+    }

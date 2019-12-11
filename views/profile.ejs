@@ -113,8 +113,10 @@
                                 <div class="form-info">
                                     <div class="form-title" id="form-title-white"><span class="form-title-txt">Update metrics</span></div>
                                     <div id="filter-update">
-                                        <form id="printUpdateForm" method="POST">
-                                            <input name="idfilter" id="idfilter-update" type="text" />
+                                        <form id="setFilterUpdate" method="POST">
+                                            <input name="idfilter_timestamp" id="idfilter_timestamp_update" type="text" />
+                                            <input name="idfilter_height" id="idfilter_height_update" type="number" min="1" max="999" />
+                                            <input name="idfilter_weight" id="idfilter_weight_update" type="number" min="1" max="999" />
                                             <input type="submit" value="" src="/img/search.png" id="search-update" width="30px">
                                             <img src="/img/visibility.png" id="hide-update" width="30px">
                                             <input name="mail-update" id="mail-update" value="<%= userEmail %>" type="hidden" />
@@ -129,8 +131,10 @@
                                 <div class="form-info">
                                     <div class="form-title" id="form-title-white"><span class="form-title-txt">Delete metrics</span></div>
                                     <div id="filter-delete">
-                                        <form id="printDeleteForm" method="POST">
-                                            <input name="idfilter" id="idfilter-delete" type="text" />
+                                        <form id="setFilterDelete" method="POST">
+                                            <input name="idfilter_timestamp" id="idfilter_timestamp_delete" type="text" />
+                                            <input name="idfilter_height" id="idfilter_height_delete" type="number" min="1" max="999" />
+                                            <input name="idfilter_weight" id="idfilter_weight_delete" type="number" min="1" max="999" />
                                             <input type="submit" value="" src="/img/search.png" id="search-delete" width="30px">
                                             <img src="/img/visibility.png" id="hide-delete" width="30px">
                                             <input name="mail-delete" id="mail-delete" value="<%= userEmail %>" type="hidden" />
@@ -156,7 +160,7 @@
                                         IMCChart = tabChart[1];
                                         var txt = '';
                                         data.forEach(function(element) {
-                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
+                                            txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp.replace('-', '/').replace('-', '/').replace('~', ' ') + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
                                         });
                                         html = $.parseHTML(txt);
                                         $('#metrics-delete').append(html);
@@ -174,7 +178,7 @@
                                         var txt = '';
                                         data.forEach(function(element) {
                                             txt += ' <form id="' + element.timestamp + '" action="/user/<%= userName %>/metrics/update/metrics_<%=userEmail%>_' + element.timestamp + '" method="POST">' +
-                                                '<br><span id="txt-title">Timestamp:</span>' + element.timestamp +
+                                                '<br><span id="txt-title">Timestamp:</span>' + element.timestamp.replace('-', '/').replace('-', '/').replace('~', ' ') +
                                                 '<span id="txt-title">Height:</span> <input class="update-field" min="1" max="999" type="number" name="metric_height" id="metric_height" value="' + element.height +
                                                 '"><span id="txt-title">Weight:</span> <input class="update-field" min="1" max="999" type="number" name="metric_weight" id="metric_weight" value="' + element.weight +
                                                 '"><button type="submit" value="" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="btn-update" width="30px"></button><br></form>';
@@ -220,10 +224,14 @@
 
                                 $('#search-delete').click((e) => {
                                     e.preventDefault();
+                                    $('form#setFilterDelete').attr('action', '/user/<%= userName %>/metrics/read/filter');
+                                    $('form#setFilterDelete').submit();
                                     refreshDelete("/user/<%= userName %>/metrics/read");
                                 })
                                 $('#search-update').click((e) => {
                                     e.preventDefault();
+                                    $('form#setFilterUpdate').attr('action', '/user/<%= userName %>/metrics/read/filter');
+                                    $('form#setFilterUpdate').submit();
                                     refreshUpdate("/user/<%= userName %>/metrics/read");
                                 });
                                 $('.update-field').live('input', function() {

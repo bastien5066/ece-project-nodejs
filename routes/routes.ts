@@ -172,12 +172,9 @@ function editProfile(req: any, res: any) {
 }
 
 function printMetrics(req: any, res: any) {
-    console.log("PRINT METRICS")
     db.getUser(req.session.user.email, (err: Error | null, result: User | null) => {
         if (err) throw err
         if (result != null) {
-            console.log("SEND RESULTS")
-            console.log(result);
             req.session.user = result;
             res.status(200).send(result.getMetrics())
         }
@@ -224,10 +221,16 @@ function deleteMetric(req: any, res: any) {
 
 }
 
+function setFilter(req: any, res: any) {
+    console.log("SET FILTER BITCH")
+    console.log(req.body)
+    res.status(204).send()
+}
+
 
 function defaultGateway(req: any, res: any) {
     res.redirect('/login');
 }
 
 
-module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile, createMetric, updateMetric, deleteMetric, printMetrics }
+module.exports = { printHomepage, printProfile, defaultGateway, checkCredentials, logout, deleteProfile, editProfile, createMetric, updateMetric, deleteMetric, printMetrics, setFilter }

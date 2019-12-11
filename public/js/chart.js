@@ -37,7 +37,7 @@ function setDataIMCChart(metricsSent, chartRef) {
     }
     var metrics = metricsSent
     metrics.forEach(function(data) {
-        labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0])
+        labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0] + " " + data.timestamp.split('~')[1])
         dataChart.firstData.push(data.weight / ((data.height / 100) * (data.height / 100)));
     });
 
@@ -82,7 +82,7 @@ function setDataSimpleChart(metricsSent, chartRef) {
     }
     var metrics = metricsSent
     metrics.forEach(function(data) {
-        labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0])
+        labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0] + " " + data.timestamp.split('~')[1])
         dataChart.firstData.push(data.height)
         dataChart.secondData.push(data.weight)
     });
