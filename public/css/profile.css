@@ -279,6 +279,7 @@
     
     .btn-choice {
         width: 50px;
+        outline: none;
         height: 50px;
         background: none;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -414,7 +415,7 @@
         height: 40px;
     }
     
-    #trash:hover,
+    .trash:hover,
     #hide-delete:hover,
     #hide-update:hover {
         cursor: pointer;

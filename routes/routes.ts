@@ -105,7 +105,8 @@ function printProfile(req: any, res: any) {
     } else if (req.params.username != req.session.user.username) {
         res.redirect('/login')
     } else {
-        res.render("profile.ejs", { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: undefined, msg: undefined });
+        console.log(JSON.stringify(req.session.user.metrics))
+        res.render("profile.ejs", { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: undefined, msg: undefined });
     }
 }
 

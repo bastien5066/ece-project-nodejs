@@ -44,6 +44,7 @@
     "dependencies": {
         "chart.js": "^2.9.3",
         "express-mysql-session": "^2.1.0",
+        "json-js": "^1.1.2",
         "level": "^6.0.0",
         "level-session-store": "^2.2.0"
     }
