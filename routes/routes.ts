@@ -224,6 +224,12 @@ function deleteMetric(req: any, res: any) {
 function setFilter(req: any, res: any) {
     console.log("SET FILTER BITCH")
     console.log(req.body)
+    if(req.body.idfilter_timestamp_update == undefined) {
+        console.log("delete")
+        db.setFilterDeleteMetric(req.body.idfilter_timestamp_delete, req.body.idfilter_height_delete, req.body.idfilter_weight_delete)
+    } else {
+        db.setFilterUpdateMetric(req.body.idfilter_timestamp_update, req.body.idfilter_height_update, req.body.idfilter_weight_update)
+    }
     res.status(204).send()
 }
 

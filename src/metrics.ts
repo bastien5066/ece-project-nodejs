@@ -28,9 +28,24 @@ export class Metric {
 
 export class MetricsHandler {
   private db: any
+  private filterChoice: string
+  private filterTimestampDelete: string
+  private filterTimestampUpdate: string
+  private filterHeightDelete: string
+  private filterHeightUpdate: string
+  private filterWeightDelete: string
+  private filterWeightUpdate: string
+
 
   constructor(dbPath: string) {
-    this.db = LevelDB.open(dbPath)
+    this.db = LevelDB.open(dbPath);
+    this.filterTimestampDelete = '';
+    this.filterTimestampUpdate = '';
+    this.filterHeightDelete = '';
+    this.filterHeightUpdate = '';
+    this.filterWeightDelete = '';
+    this.filterWeightUpdate = '';
+    this.filterChoice = ''
   }
 
   public add(keyUser: string, metrics: Metric[], callback: (error: Error | null) => void) {
@@ -46,11 +61,87 @@ export class MetricsHandler {
   public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => Metric[]) {
     // Read
     let metrics: Metric[] = []
+    let self = this;
     this.db.createReadStream()
       .on('data', function (data) {
         if (data.key.includes(keyUser)) {
-          let oneMetric: Metric = new Metric(data.value.split('_')[0], data.value.split('_')[1], data.value.split('_')[2])
-          metrics.push(oneMetric)
+          let oneMetric: Metric = new Metric(data.value.split('_')[0], data.value.split('_')[1], data.value.split('_')[2]);
+          console.log(self.filterTimestampDelete)
+          console.log(oneMetric.getTimestamp())
+          if (self.filterChoice == '' ||
+            (self.filterChoice == 'delete' && self.filterTimestampDelete == '' && self.filterHeightDelete == '' && self.filterWeightDelete == '') ||
+            (self.filterChoice == 'update' && self.filterTimestampUpdate == '' && self.filterHeightUpdate == '' && self.filterWeightUpdate == '')) {
+            metrics.push(oneMetric);
+          } else if (self.filterChoice == 'delete' && self.filterTimestampDelete != '' && self.filterHeightDelete != '' && self.filterWeightDelete != '') {
+            console.log("COUCOU")
+            if (oneMetric.getTimestamp().toString().includes(self.filterTimestampDelete) &&
+              oneMetric.getHeight().toString().includes(self.filterHeightDelete) &&
+              oneMetric.getWeight().toString().includes(self.filterWeightDelete)) {
+              metrics.push(oneMetric);
+            }
+          } else if (self.filterChoice == 'update' && self.filterTimestampUpdate != '' && self.filterHeightUpdate != '' && self.filterWeightUpdate != '') {
+            if (oneMetric.getTimestamp().toString().includes(self.filterTimestampUpdate) &&
+              oneMetric.getHeight().toString().includes(self.filterHeightUpdate) &&
+              oneMetric.getWeight().toString().includes(self.filterWeightUpdate)) {
+              metrics.push(oneMetric);
+            }
+          }
+          else {
+            if (self.filterChoice == 'delete') {
+              //delete
+              if (self.filterTimestampDelete == '' && self.filterHeightDelete == '' && self.filterWeightDelete != '') {
+                if (oneMetric.getWeight().toString().includes(self.filterWeightDelete)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampDelete == '' && self.filterHeightDelete != '' && self.filterWeightDelete == '') {
+                if (oneMetric.getHeight().toString().includes(self.filterHeightDelete)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampDelete != '' && self.filterWeightDelete == '' && self.filterHeightDelete == '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampDelete)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampDelete == '' && self.filterHeightDelete != '' && self.filterWeightDelete != '') {
+                if (oneMetric.getWeight().toString().includes(self.filterWeightDelete) && oneMetric.getHeight().toString().includes(self.filterHeightDelete)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampDelete != '' && self.filterHeightDelete != '' && self.filterWeightDelete == '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampDelete) && oneMetric.getHeight().toString().includes(self.filterHeightDelete)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampDelete != '' && self.filterHeightDelete == '' && self.filterWeightDelete != '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampDelete) && oneMetric.getWeight().toString().includes(self.filterWeightDelete)) {
+                  metrics.push(oneMetric);
+                }
+              }
+            } else {
+              if (self.filterTimestampUpdate == '' && self.filterHeightUpdate == '' && self.filterWeightUpdate != '') {
+                if (oneMetric.getWeight().toString().includes(self.filterWeightUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampUpdate == '' && self.filterHeightUpdate != '' && self.filterWeightUpdate == '') {
+                if (oneMetric.getHeight().toString().includes(self.filterHeightUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampUpdate != '' && self.filterWeightUpdate == '' && self.filterHeightUpdate == '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampUpdate == '' && self.filterHeightUpdate != '' && self.filterWeightUpdate != '') {
+                if (oneMetric.getWeight().toString().includes(self.filterWeightUpdate) && oneMetric.getHeight().toString().includes(self.filterHeightUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampUpdate != '' && self.filterHeightUpdate != '' && self.filterWeightUpdate == '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampUpdate) && oneMetric.getHeight().toString().includes(self.filterHeightUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              } else if (self.filterTimestampUpdate != '' && self.filterHeightUpdate == '' && self.filterWeightUpdate != '') {
+                if (oneMetric.getTimestamp().toString().includes(self.filterTimestampUpdate) && oneMetric.getWeight().toString().includes(self.filterWeightUpdate)) {
+                  metrics.push(oneMetric);
+                }
+              }
+            }
+          }
         }
       })
       .on('error', function (err) {
@@ -98,13 +189,27 @@ export class MetricsHandler {
     });
   }
 
-  public updateOne(keyMetric: string, newMetric:Metric, callback: (error: Error | null) => void) {
+  public updateOne(keyMetric: string, newMetric: Metric, callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
     stream.on('error', callback)
-    stream.on('close', callback)   
+    stream.on('close', callback)
     console.log("KEY")
     console.log(keyMetric)
     stream.write({ key: keyMetric, value: `${newMetric.getTimestamp()}_${newMetric.getHeight()}_${newMetric.getWeight()}` })
     stream.end()
+  }
+
+  public setFilterDeleteMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
+    this.filterTimestampDelete = keyTimestamp.toString();
+    this.filterHeightDelete = keyHeight.toString();
+    this.filterWeightDelete = keyWeight.toString();
+    this.filterChoice = "delete";
+  }
+
+  public setFilterUpdateMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
+    this.filterTimestampUpdate = keyTimestamp.toString();
+    this.filterHeightUpdate = keyHeight.toString();
+    this.filterWeightUpdate = keyWeight.toString();
+    this.filterChoice = "update";
   }
 }

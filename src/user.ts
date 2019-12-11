@@ -34,8 +34,8 @@ export class UserHandler {
   private metricsDB: any
 
   constructor(path: string) {
-    this.db = LevelDB.open(path)
-    this.metricsDB = new MetricsHandler('./db/metrics')
+    this.db = LevelDB.open(path);
+    this.metricsDB = new MetricsHandler('./db/metrics');
   }
 
   public add(users: User[], callback: (error: Error | null) => void) {
@@ -184,5 +184,13 @@ export class UserHandler {
       if (err) throw err
       else console.log("DONE DELETING")
     });
+  }
+
+  public setFilterUpdateMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
+    this.metricsDB.setFilterUpdateMetric(keyTimestamp, keyHeight, keyWeight);
+  }
+
+  public setFilterDeleteMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
+    this.metricsDB.setFilterDeleteMetric(keyTimestamp, keyHeight, keyWeight);
   }
 }
