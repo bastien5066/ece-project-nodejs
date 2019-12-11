@@ -442,3 +442,7 @@
         height: 40px;
         background-size: 40px 40px;
     }
+    
+    .chart {
+        margin-bottom: 5%;
+    }

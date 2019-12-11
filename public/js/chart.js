@@ -1,20 +1,17 @@
-var simpleChart = null;
-var IMCChart = null
-
-function refreshChart(newMetrics) {
-    setDataIMCChart(newMetrics)
-    setDataSimpleChart(newMetrics)
+function refreshChart(newMetrics, simpleChart, IMCChart) {
+    var simpleChart = setDataSimpleChart(newMetrics, simpleChart);
+    var IMCChart = setDataIMCChart(newMetrics, IMCChart);
+    return [simpleChart, IMCChart];
 }
 
-function setDataIMCChart(metricsSent) {
+function setDataIMCChart(metricsSent, chartRef) {
     var dataChart = {
-        dataHeightChart: [],
-        dataWeightChart: []
+        firstData: [],
     }
 
     var labelsChart = {
         labelsChart: [],
-        labelsDataChart: ["Height", "Weight"]
+        labelsDataChart: ["IMC"]
     }
 
     const typeChart = ["line", "bar"]
@@ -22,7 +19,7 @@ function setDataIMCChart(metricsSent) {
     const settingsChart = {
         colorChart: ["red", "blue"],
         titleDisplay: true,
-        titleChart: "Evolution of your height and weight through time",
+        titleChart: "Evolution of your IMC (weight(kg)/height²(m)) through time",
         titleFontColor: "black",
         titleFontFamily: "Impact",
         titleFontSize: "18",
@@ -43,18 +40,18 @@ function setDataIMCChart(metricsSent) {
     var metrics = metricsSent
     metrics.forEach(function(data) {
         labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0])
-        dataChart.dataHeightChart.push(data.height)
-        dataChart.dataWeightChart.push(data.weight)
+        dataChart.firstData.push(data.weight / ((data.height / 100) * (data.height / 100)));
     });
 
-    drawChart('#imc-chart', IMCChart, 'bar', labelsChart, dataChart, typeChart, settingsChart);
+    chart = drawChart('#imc-chart', chartRef, 'bar', labelsChart, dataChart, typeChart, settingsChart);
     $('#imc-chart').show();
+    return chart;
 }
 
-function setDataSimpleChart(metricsSent) {
+function setDataSimpleChart(metricsSent, chartRef) {
     var dataChart = {
-        dataHeightChart: [],
-        dataWeightChart: []
+        firstData: [],
+        secondData: []
     }
 
     var labelsChart = {
@@ -88,42 +85,63 @@ function setDataSimpleChart(metricsSent) {
     var metrics = metricsSent
     metrics.forEach(function(data) {
         labelsChart.labelsChart.push(data.timestamp.replace('-', '/').replace('-', '/').split('~')[0])
-        dataChart.dataHeightChart.push(data.height)
-        dataChart.dataWeightChart.push(data.weight)
+        dataChart.firstData.push(data.height)
+        dataChart.secondData.push(data.weight)
     });
 
-    drawChart('#simple-chart', simpleChart, 'bar', labelsChart, dataChart, typeChart, settingsChart);
+    chart = drawChart('#simple-chart', chartRef, 'bar', labelsChart, dataChart, typeChart, settingsChart);
     $('#simple-chart').show();
+    return chart;
 }
 
 
 function drawChart(chartName, chartRef, type, labelsChart, dataChart, typeChart, settingsChart) {
-    var data = {
-        labels: labelsChart.labelsChart,
-        datasets: [{
-            label: labelsChart.labelsDataChart[0],
-            type: typeChart[0],
-            borderColor: settingsChart.colorChart[0],
-            data: dataChart.dataHeightChart,
-            fill: false
-        }, {
-            label: labelsChart.labelsDataChart[1],
-            type: typeChart[0],
-            borderColor: settingsChart.colorChart[1],
-            data: dataChart.dataWeightChart,
-            fill: false
-        }, {
-            label: labelsChart.labelsDataChart[0],
-            type: typeChart[1],
-            backgroundColor: settingsChart.colorChart[0],
-            data: dataChart.dataHeightChart,
-        }, {
-            label: labelsChart.labelsDataChart[1],
-            type: typeChart[1],
-            backgroundColor: settingsChart.colorChart[1],
-            data: dataChart.dataWeightChart
-        }]
-    };
+    if (dataChart.secondData != undefined) {
+        var data = {
+            labels: labelsChart.labelsChart,
+            datasets: [{
+                label: labelsChart.labelsDataChart[0],
+                type: typeChart[0],
+                borderColor: settingsChart.colorChart[0],
+                data: dataChart.firstData,
+                fill: false
+            }, {
+                label: labelsChart.labelsDataChart[1],
+                type: typeChart[0],
+                borderColor: settingsChart.colorChart[1],
+                data: dataChart.secondData,
+                fill: false
+            }, {
+                label: labelsChart.labelsDataChart[0],
+                type: typeChart[1],
+                backgroundColor: settingsChart.colorChart[0],
+                data: dataChart.firstData,
+            }, {
+                label: labelsChart.labelsDataChart[1],
+                type: typeChart[1],
+                backgroundColor: settingsChart.colorChart[1],
+                data: dataChart.secondData
+            }]
+        };
+    } else {
+        var data = {
+            labels: labelsChart.labelsChart,
+            datasets: [{
+                    label: labelsChart.labelsDataChart[0],
+                    type: typeChart[0],
+                    borderColor: settingsChart.colorChart[0],
+                    data: dataChart.firstData,
+                    fill: false
+                },
+                {
+                    label: labelsChart.labelsDataChart[0],
+                    type: typeChart[1],
+                    backgroundColor: settingsChart.colorChart[0],
+                    data: dataChart.firstData,
+                },
+            ]
+        };
+    }
     var options = {
         responsive: true,
         title: {
@@ -153,4 +171,6 @@ function drawChart(chartName, chartRef, type, labelsChart, dataChart, typeChart,
         data: data,
         options: options
     });
+
+    return chartRef;
 }

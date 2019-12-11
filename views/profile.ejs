@@ -6,7 +6,6 @@
     <title>XtreMetrics - Profile</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-    <script type="text/javascript" src='/js/chart.js'></script>
     <link rel="stylesheet" type="text/css" href="/css/profile.css">
 </head>
 
@@ -146,10 +145,15 @@
                         </section>
                         <script>
                             $(document).ready(function() {
+                                var simpleChart = null;
+                                var IMCChart = null
+
                                 function refreshDelete(path) {
                                     $("#metrics-delete").empty();
                                     var request = $.getJSON(path, function(data) {
-                                        refreshChart(data)
+                                        tabChart = refreshChart(data, simpleChart, IMCChart)
+                                        simpleChart = tabChart[0];
+                                        IMCChart = tabChart[1];
                                         var txt = '';
                                         data.forEach(function(element) {
                                             txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
@@ -167,7 +171,6 @@
                                 function refreshUpdate(path) {
                                     $("#metrics-update").empty();
                                     var request = $.getJSON(path, function(data) {
-                                        refreshChart(data)
                                         var txt = '';
                                         data.forEach(function(element) {
                                             txt += ' <form id="' + element.timestamp + '" action="/user/<%= userName %>/metrics/update/metrics_<%=userEmail%>_' + element.timestamp + '" method="POST">' +
@@ -232,14 +235,15 @@
 
                                 $("#btn-read").click(function() {
                                     setTimeout(function() {
-                                        setDataSimpleChart(<%- userMetrics%>)
-                                        setDataIMCChart(<%- userMetrics%>)
+                                        simpleChart = setDataSimpleChart(<%- userMetrics%>, simpleChart)
+                                        IMCChart = setDataIMCChart(<%- userMetrics%>, IMCChart)
                                     }, 600);
 
                                 });
                             });
                         </script>
                         <script type="text/javascript" src='/js/profile.js'></script>
+                        <script type="text/javascript" src='/js/chart.js'></script>
 
 </body>
 
