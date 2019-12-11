@@ -221,7 +221,7 @@
         color: red;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 1em;
-        width: 70px;
+        min-width: 70px;
         margin-right: 0.5em;
     }
     

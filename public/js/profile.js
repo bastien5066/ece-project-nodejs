@@ -1,43 +1,4 @@
 $(document).ready(function() {
-
-    function refreshDelete(path) {
-        $("#metrics-delete").empty();
-        var request = $.getJSON(path, function(data) {
-            var txt = '';
-            data.forEach(function(element) {
-                txt += '<br><span id="txt-title">Timestamp:</span> ' + element.timestamp + ' <span id="txt-title">Height:</span> ' + element.height + '<span id="txt-title">Weight:</span> ' + element.weight + '<img src="/img/trash.png" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="trash" width="30px"><br>';
-            });
-            html = $.parseHTML(txt);
-            $('#metrics-delete').append(html);
-        }).fail(function(request, status, error) {
-            console.log('error', status, error)
-        }).always(function() {
-            console.log("complete");
-        });
-    }
-
-    function refreshUpdate(path) {
-        $("#metrics-update").empty();
-        var request = $.getJSON(path, function(data) {
-            var txt = '';
-            data.forEach(function(element) {
-                txt += ' <form id="' + element.timestamp + '" action="/user/<%= userName %>/metrics/update/metrics_<%=userEmail%>_' + element.timestamp + '" method="POST">' +
-                    '<br><span id="txt-title">Timestamp:</span>' + element.timestamp +
-                    '<span id="txt-title">Height:</span> <input class="update-field" min="1" max="999" type="number" name="metric_height" id="metric_height" value="' + element.height +
-                    '"><span id="txt-title">Weight:</span> <input class="update-field" min="1" max="999" type="number" name="metric_weight" id="metric_weight" value="' + element.weight +
-                    '"><button type="submit" value="" id="metrics_<%=userEmail%>_' + element.timestamp + '" class="btn-update" width="30px"></button><br></form>';
-            });
-            html = $.parseHTML(txt);
-            $('#metrics-update').append(html);
-        }).fail(function(request, status, error) {
-            console.log('error', status, error)
-        }).always(function() {
-            console.log("complete");
-        });
-
-    }
-
-
     $(".title").fadeTo(5000, 0.001, function() {
         $(this).slideUp(500, function() {
             $(this).remove();
@@ -119,49 +80,5 @@ $(document).ready(function() {
     });
     $("[type='number']").keypress(function(evt) {
         evt.preventDefault();
-    });
-    $("#form-button-metrics").click((e) => {
-        $.ajax({
-            url: '/user/<%= userName %>/metrics/create',
-            success: function(data) {
-                $("#weight").val("");
-                $("#height").val("");
-                refreshDelete("/user/<%= userName %>/metrics/read");
-                refreshUpdate("/user/<%= userName %>/metrics/read");
-            }
-        });
-    });
-    $(".trash").live('click', function() {
-        var paramID = $(this).attr("id");
-        $('form#deleteForm').attr('action', '/user/<%= userName %>/metrics/delete/' + paramID);
-        $('form#deleteForm').submit();
-        refreshDelete("/user/<%= userName %>/metrics/delete/" + paramID)
-        refreshUpdate("/user/<%= userName %>/metrics/read");
-    });
-    $(".btn-update").live('click', function() {
-        var paramID = $(this).attr("id");
-        $.ajax({
-            url: '/user/<%= userName %>/metrics/update/' + paramID,
-            success: function(data) {
-                refreshUpdate('/user/<%= userName %>/metrics/update/' + paramID)
-                refreshDelete("/user/<%= userName %>/metrics/read");
-            }
-        });
-
-    });
-
-    $('#search-delete').click((e) => {
-        e.preventDefault();
-        refreshDelete("/user/<%= userName %>/metrics/read");
-    })
-    $('#search-update').click((e) => {
-        e.preventDefault();
-        refreshUpdate("/user/<%= userName %>/metrics/read");
-    });
-    $('.update-field').live('input', function() {
-        $(this).css('color', 'red');
-        $("[type='number']").keypress(function(evt) {
-            evt.preventDefault();
-        });
     });
 });
