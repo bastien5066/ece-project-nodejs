@@ -1,7 +1,5 @@
 function refreshChart(newMetrics, simpleChart, IMCChart) {
-    var simpleChart = setDataSimpleChart(newMetrics, simpleChart);
-    var IMCChart = setDataIMCChart(newMetrics, IMCChart);
-    return [simpleChart, IMCChart];
+    return [setDataSimpleChart(newMetrics, simpleChart), setDataIMCChart(newMetrics, IMCChart)];
 }
 
 function setDataIMCChart(metricsSent, chartRef) {
