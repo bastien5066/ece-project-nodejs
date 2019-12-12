@@ -67,7 +67,7 @@ export class MetricsHandler {
     let metrics: Metric[] = []
     let self = this;
     this.db.createReadStream()
-      .on('data', function (data) {
+      .on('data', function (data) { 
         if (data.key.includes(keyUser)) {
           let oneMetric: Metric = new Metric(data.value.split('_')[0], Number(data.value.split('_')[1]), Number(data.value.split('_')[2]));
           if (self.filterChoice == '' ||
@@ -149,6 +149,7 @@ export class MetricsHandler {
         callback(err, null)
       })
       .on('close', function () {
+        console.log("callback metrics")
         callback(null, metrics)
       })
   }

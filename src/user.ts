@@ -59,8 +59,12 @@ export class UserHandler {
 
   public addUser(users: User[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
-    stream.on('error', callback)
-    stream.on('close', callback)
+    stream.on('error', function (err) {
+      callback(err)
+    })
+    stream.on('close', function () {
+      callback(null)
+    })
     users.forEach((m: User) => {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
     })
@@ -85,6 +89,7 @@ export class UserHandler {
             console.log(err)
           }
           if (counter == users.length) {
+            console.log("callback")
             callback(null, users)
           }
         });
@@ -92,7 +97,7 @@ export class UserHandler {
       .on('error', function (err) {
         callback(err, null)
       })
-      .on('close', function () {
+      .on('close', function (err) {
         if (users.length == 0) {
           callback(null, users)
         }
