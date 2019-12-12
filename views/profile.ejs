@@ -242,10 +242,18 @@
                                 });
 
                                 $("#btn-read").click(function() {
-                                    setTimeout(function() {
-                                        simpleChart = setDataSimpleChart(<%- userMetrics%>, simpleChart)
-                                        IMCChart = setDataIMCChart(<%- userMetrics%>, IMCChart)
-                                    }, 600);
+                                    if (simpleChart == null && IMCChart == null) {
+                                        console.log("build charts")
+                                        setTimeout(function() {
+                                            simpleChart = setDataSimpleChart(<%- userMetrics%>, simpleChart)
+                                            IMCChart = setDataIMCChart(<%- userMetrics%>, IMCChart)
+                                        }, 600);
+                                    } else {
+                                        setTimeout(function() {
+                                            refreshDelete("/user/<%= userName %>/metrics/read/");
+                                        }, 600);
+
+                                    }
 
                                 });
                             });

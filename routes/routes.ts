@@ -24,9 +24,9 @@ function checkCredentials(req: any, res: any) {
         console.log("sign-in");
         db.getAllUser((err: Error | null, result: User[] | null) => {
             console.log("YOOOOOOO")
-            if (!err && result!= null && result.length != 0) {
+            if (!err && result != null) {
                 console.log(result)
-                if (result != null && result.length != 0) {
+                if (result.length != 0) {
                     console.log("NEXXXTTT")
                     result.forEach(function (element: any) {
                         console.log(element.email)
@@ -47,6 +47,8 @@ function checkCredentials(req: any, res: any) {
                     } else {
                         res.render('../views/homepage.ejs', { err: true, msg: "Sorry, the e-mail address and password you entered did not match any account in our records. Please check your entries and try again." });
                     }
+                } else {
+                    //res.render('../views/homepage.ejs', { err: true, msg: "Sorry, the e-mail address and password you entered did not match any account in our records. Please check your entries and try again." });
                 }
             } else {
                 console.log(err)
@@ -61,8 +63,8 @@ function checkCredentials(req: any, res: any) {
             res.render('../views/homepage.ejs', { err: true, msg: "Sorry, password doesn't match confirmation." })
         } else {
             db.getAllUser((err: Error | null, result: User[] | null) => {
-                if (!err && result!= null && result.length != 0) {
-                    if (result !== null) {
+                if (!err && result != null) {
+                    if (result.length != 0) {
                         result.forEach(function (element: any) {
                             if (element.email === req.body.user_mail) {
                                 email.push(element.email)
@@ -77,6 +79,13 @@ function checkCredentials(req: any, res: any) {
                         } else {
                             res.render('../views/homepage.ejs', { err: true, msg: " Sorry, this e-mail address is already in use. Please try another e-mail." })
                         }
+                    } else {
+                        /*let newUser: User = new User(req.body.user_mail, req.body.user_name, req.body.user_password, []);
+                        db.addUser([newUser], (err: Error | null) => {
+                            if (err) console.log(err);
+                        });
+                        res.render('../views/homepage.ejs', { err: false, msg: "Your account has successfully been created ! Use your e-mail and password to access your XtreMetrics account." })   
+                        */
                     }
                 } else {
                     console.log(err)
@@ -121,50 +130,56 @@ function deleteProfile(req: any, res: any) {
 function editProfile(req: any, res: any) {
     let email: any = [];
     let previousEmail: any = req.session.user.email;
+    let saveUser: User = new User(req.body.user_mail, req.body.user_name, req.body.user_password, [])
+    req.session.user.metrics.forEach(function (data) {
+        saveUser.addMetric(new Metric(data.timestamp, data.height, data.weight));
+    });
+    console.log("REQ SESSION")
     console.log(req.session)
     let newUser: User = new User(req.body.user_mail, req.body.user_name, req.body.user_password, req.session.user.metrics)
     if (!req.body.user_mail.includes("@")) {
-        res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, you didn't enter a proper e-mail address." })
+        res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: true, msg: "Sorry, you didn't enter a proper e-mail address." })
     } else {
         db.getAllUser((err: Error | null, result: User[] | null) => {
             if (!err) {
                 if (result !== null) {
                     result.forEach(function (element: any) {
-                        console.log("-- element.email")
-                        console.log(element.email)
-                        console.log("-- req.body.user_mail")
                         console.log(req.body.user_mail)
                         if (element.email == req.body.user_mail && previousEmail != req.body.user_mail) {
-                            console.log("******ALREADY EXIST************")
                             email.push(element.email)
                         }
                     })
                 } else {
                     console.log('callback result is null')
-                }
-                if (email.length != 0) {
-                    res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
+                }             
+               
+            }
+        });
+          if (email.length != 0) {
+                    res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
                 } else {
                     db.remove([req.session.user.email], (err: Error | null) => {
                         if (err) throw err
-                        else {
-                            db.add([newUser], (err: Error | null) => {
-                                if (err) throw err
-                            })
-                        }
                     });
-                    req.session.user = newUser;
-                    res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: newUser.getMetrics(), err: false, msg: "Your account has successfully been modified !" })
-                }
-            }
-        });
+                    db.add([saveUser], (err: Error | null) => {
+                        if (err) throw err 
+                        else {
+                            console.log(newUser)
+                            req.session.user = newUser
+                            res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: JSON.stringify(newUser.getMetrics()), err: false, msg: "Your account has successfully been modified !" })
+                        }                     
+                    })
+               }
     }
 }
 
 function printMetrics(req: any, res: any) {
+    console.log("------------------------- print metrics ")
+    console.log(req.session.user.email)
     db.getUser(req.session.user.email, (err: Error | null, result: User | null) => {
         if (err) throw err
         if (result != null) {
+            console.log(result)
             req.session.user = result;
             res.status(200).send(result.getMetrics())
         }
@@ -212,10 +227,7 @@ function deleteMetric(req: any, res: any) {
 }
 
 function setFilter(req: any, res: any) {
-    console.log("SET FILTER BITCH")
-    console.log(req.body)
     if (req.body.idfilter_timestamp_update == undefined) {
-        console.log("delete")
         db.setFilterDeleteMetric(req.body.idfilter_timestamp_delete, req.body.idfilter_height_delete, req.body.idfilter_weight_delete)
     } else {
         db.setFilterUpdateMetric(req.body.idfilter_timestamp_update, req.body.idfilter_height_update, req.body.idfilter_weight_update)

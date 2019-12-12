@@ -27,6 +27,9 @@ export class User {
   public getMetrics() {
     return this.metrics
   }
+  public addMetric(_met) {
+    this.metrics.push(_met)
+  }
 }
 
 export class UserHandler {
@@ -45,9 +48,6 @@ export class UserHandler {
     stream.on('error', function (err) {
       callback(err)
     })
-    stream.on('close', function () {
-      callback(null)
-    })
     users.forEach((m: User) => {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
@@ -55,6 +55,7 @@ export class UserHandler {
       })
     })
     stream.end()
+    callback(null)
   }
 
   public addUser(users: User[], callback: (error: Error | null) => void) {
