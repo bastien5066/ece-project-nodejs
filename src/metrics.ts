@@ -159,13 +159,9 @@ export class MetricsHandler {
         if (err) {
           callback(err)
         }
-        else {
-          callback(null)
-
-        }
       });
     })
-
+    callback(null)
   }
   public removeOne(keyMetric: string, callback: (error: Error | null) => void) {
     this.db.del(keyMetric, function (err) {

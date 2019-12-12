@@ -38,7 +38,7 @@ export class UserHandler {
     this.metricsDB = new MetricsHandler(pathMetric);
   }
   public getMetricsHandler() {
-      return this.metricsDB;
+    return this.metricsDB;
   }
   public add(users: User[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
@@ -47,16 +47,12 @@ export class UserHandler {
     })
     stream.on('close', function () {
       callback(null)
-    })  
+    })
     users.forEach((m: User) => {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) throw err
-        else {
-          callback(null)
-        }
       })
-
     })
     stream.end()
   }
@@ -97,7 +93,7 @@ export class UserHandler {
         callback(err, null)
       })
       .on('close', function () {
-        if(users.length == 0) {
+        if (users.length == 0) {
           callback(null, users)
         }
       })
@@ -108,7 +104,6 @@ export class UserHandler {
     this.db.createReadStream()
       .on('data', function (data) {
         let key = data.key.split('_')[1]
-        console.log("YES")
         if (key == email) {
           self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
             if (!err) {
@@ -130,54 +125,48 @@ export class UserHandler {
         console.log('Oh my!', err)
         callback(err, null)
       })
-      .on('close', function () {
-        console.log('Stream closed')
-      })
-      .on('end', function () {
-        console.log('Stream ended')
-      })
   }
 
-  public remove(email: string, callback: (error: Error | null) => void) {
+  public remove(emailTab: string[], callback: (error: Error | null) => void) {
     let self = this.metricsDB;
-    console.log("remove")
-    this.getUser(email, (err: Error | null, result: User | null) => {
-      if (!err) {
-        console.log(result)
-        if (result != undefined && result != null) {
-          let metrics: Metric[] = result.getMetrics()
-          this.db.del(`user_${result.getEmail()}`, function (err) {
-            if (err) {
-              callback(err)
-            }
-            else {
-              if (metrics.length > 0) {
-                self.del('metrics_' + email, metrics, (err: Error | null, result: Metric[] | null) => {
-                  if (err) throw err
-                  else console.log("DONE DELETING")
-                });
-              } else {
-                self.del('metrics_' + email, [], (err: Error | null, result: Metric[] | null) => {
-                  if (err) throw err
-                  else console.log("DONE DELETING")
-                });
+    let that = this;
+    let counter = 0;
+    emailTab.forEach(function (email) {
+      that.getUser(email, (err: Error | null, result: User | null) => {        
+        if (!err) {
+          if (result != undefined && result != null) {
+            let metrics: Metric[] = result.getMetrics()
+            that.db.del(`user_${result.getEmail()}`, function (err) {
+              if (err) {
+                callback(err)
               }
-              callback(null)
-            }
-          });
-        }
-      } else {
-        console.log(err)
-        callback(err)
-      };
-    });
+              else {
+                if (metrics.length > 0) {
+                  self.del('metrics_' + email, metrics, (err: Error | null, result: Metric[] | null) => {
+                    if (err) throw err
+                  });
+                } else {
+                  self.del('metrics_' + email, [], (err: Error | null, result: Metric[] | null) => {
+                    if (err) throw err
+                  });
+                }
+              }
+            });
+            callback(null)
+          }          
+        } else {
+          console.log(err)
+          callback(err)
+        };
+      });
+    })
+
   }
 
   public addUserMetric(keyUser: string, metric: Metric, callback: (error: Error | null) => void) {
     this.metricsDB.add(keyUser, [metric], (err: Error | null) => {
       if (err) throw err
       else {
-        console.log('Data added')
         callback(null)
       }
     });
@@ -187,7 +176,6 @@ export class UserHandler {
   public removeUserMetric(keyMetric: string, callback: (error: Error | null) => void) {
     this.metricsDB.removeOne(keyMetric, (err: Error | null, result: Metric[] | null) => {
       if (err) throw err
-      else console.log("DONE DELETING")
     });
   }
 

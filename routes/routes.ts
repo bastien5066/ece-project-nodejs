@@ -119,7 +119,7 @@ function logout(req: any, res: any) {
 function deleteProfile(req: any, res: any) {
     console.log("DELETE PROFILE")
     console.log(req.session.user.email);
-    db.remove(req.session.user.email, (err: Error | null) => {
+    db.remove([req.session.user.email], (err: Error | null) => {
         if (err) throw err
         else {
             res.redirect('/logout')
@@ -155,7 +155,7 @@ function editProfile(req: any, res: any) {
                     res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: req.session.user.metrics, err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
                     res.end()
                 } else {
-                    db.remove(req.session.user.email, (err: Error | null) => {
+                    db.remove([req.session.user.email], (err: Error | null) => {
                         if (err) throw err
                         else {
                             console.log("**********************************")
