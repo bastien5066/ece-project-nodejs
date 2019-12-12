@@ -37,15 +37,15 @@ export class UserHandler {
     this.db = LevelDB.open(path);
     this.metricsDB = new MetricsHandler(pathMetric);
   }
-
+  public getMetricsHandler() {
+      return this.metricsDB;
+  }
   public add(users: User[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
     stream.on('error', function (err) {
-      console.log('Oh my!', err)
       callback(err)
     })
     stream.on('close', function () {
-      console.log('Stream closed')
       callback(null)
     })  
     users.forEach((m: User) => {
@@ -53,7 +53,6 @@ export class UserHandler {
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) throw err
         else {
-          console.log('Data populated')
           callback(null)
         }
       })
@@ -95,17 +94,12 @@ export class UserHandler {
         });
       })
       .on('error', function (err) {
-        console.log('Oh my!', err)
         callback(err, null)
       })
       .on('close', function () {
-        console.log('Stream closed')
         if(users.length == 0) {
           callback(null, users)
         }
-      })
-      .on('end', function () {
-        console.log('Stream ended')
       })
   }
   public getUser(email: string, callback: (error: Error | null, result: User | null) => void) {
