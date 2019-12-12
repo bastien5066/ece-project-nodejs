@@ -7,7 +7,7 @@ const usr = [
   new User('test3@email.com', 'test3', 'password3', [new Metric('01-01-2019~10:10:30', 198, 80)]),
 ]
 
-const db = new UserHandler('./db/users')
+const db = new UserHandler('./db/users', './db/metrics')
 
 db.add(usr, (err: Error | null) => {
   if (err) throw err

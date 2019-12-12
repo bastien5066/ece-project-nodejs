@@ -50,30 +50,34 @@ export class MetricsHandler {
 
   public add(keyUser: string, metrics: Metric[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
-    stream.on('error', callback)
-    stream.on('close', callback)
+    stream.on('error', function (err) {
+      callback(err)
+    })
+    stream.on('close', function () {
+      callback(null)
+    })  
     metrics.forEach((m: Metric) => {
+      console.log(`${keyUser}_${m.getTimestamp()}`);
       stream.write({ key: `${keyUser}_${m.getTimestamp()}`, value: `${m.getTimestamp()}_${m.getHeight()}_${m.getWeight()}` })
     })
     stream.end()
   }
 
-  public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => void ) {
+  public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => void) {
     // Read
     let metrics: Metric[] = []
     let self = this;
     this.db.createReadStream()
       .on('data', function (data) {
+        console.log("KEY")
+        console.log(data.key)
         if (data.key.includes(keyUser)) {
-          let oneMetric: Metric = new Metric(data.value.split('_')[0], data.value.split('_')[1], data.value.split('_')[2]);
-          console.log(self.filterTimestampDelete)
-          console.log(oneMetric.getTimestamp())
+          let oneMetric: Metric = new Metric(data.value.split('_')[0], Number(data.value.split('_')[1]), Number(data.value.split('_')[2]));
           if (self.filterChoice == '' ||
             (self.filterChoice == 'delete' && self.filterTimestampDelete == '' && self.filterHeightDelete == '' && self.filterWeightDelete == '') ||
             (self.filterChoice == 'update' && self.filterTimestampUpdate == '' && self.filterHeightUpdate == '' && self.filterWeightUpdate == '')) {
             metrics.push(oneMetric);
           } else if (self.filterChoice == 'delete' && self.filterTimestampDelete != '' && self.filterHeightDelete != '' && self.filterWeightDelete != '') {
-            console.log("COUCOU")
             if (oneMetric.getTimestamp().toString().includes(self.filterTimestampDelete) &&
               oneMetric.getHeight().toString().includes(self.filterHeightDelete) &&
               oneMetric.getWeight().toString().includes(self.filterWeightDelete)) {
@@ -145,20 +149,17 @@ export class MetricsHandler {
         }
       })
       .on('error', function (err) {
-        console.log('Oh my!', err)
         callback(err, null)
       })
       .on('close', function () {
-        console.log('Stream closed')
+        console.log("***** CALLBACK ******")
+        console.log(metrics)
         callback(null, metrics)
-      })
-      .on('end', function () {
-        console.log('Stream ended')
       })
   }
 
   public del(keyUser: string, metrics: Metric[], callback: (error: Error | null) => void) {
-    console.log("metrics.forEach")
+    console.log("METRICS BITCH")
     console.log(metrics)
     metrics.forEach((m: Metric) => {
       this.db.del(`${keyUser}_${m.getTimestamp()}`, function (err) {
@@ -166,8 +167,6 @@ export class MetricsHandler {
           callback(err)
         }
         else {
-          console.log("deleted")
-          console.log(`${keyUser}_${m.getTimestamp()}`)
           callback(null)
 
         }
@@ -181,22 +180,9 @@ export class MetricsHandler {
         callback(err)
       }
       else {
-        console.log("deleted")
-        console.log(keyMetric)
         callback(null)
-
       }
     });
-  }
-
-  public updateOne(keyMetric: string, newMetric: Metric, callback: (error: Error | null) => void) {
-    const stream = WriteStream(this.db)
-    stream.on('error', callback)
-    stream.on('close', callback)
-    console.log("KEY")
-    console.log(keyMetric)
-    stream.write({ key: keyMetric, value: `${newMetric.getTimestamp()}_${newMetric.getHeight()}_${newMetric.getWeight()}` })
-    stream.end()
   }
 
   public setFilterDeleteMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
@@ -213,7 +199,8 @@ export class MetricsHandler {
     this.filterChoice = "update";
   }
 
-  public close() {
-    this.db.close()
+  public close(callback: (error: Error | null) => void) {
+    this.db.close();
+    callback(null);
   }
 }

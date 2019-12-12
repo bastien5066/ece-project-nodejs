@@ -33,15 +33,21 @@ export class UserHandler {
   private db: any
   private metricsDB: any
 
-  constructor(path: string) {
+  constructor(path: string, pathMetric: string) {
     this.db = LevelDB.open(path);
-    this.metricsDB = new MetricsHandler('./db/metrics');
+    this.metricsDB = new MetricsHandler(pathMetric);
   }
 
   public add(users: User[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
-    stream.on('error', callback)
-    stream.on('close', callback)
+    stream.on('error', function (err) {
+      console.log('Oh my!', err)
+      callback(err)
+    })
+    stream.on('close', function () {
+      console.log('Stream closed')
+      callback(null)
+    })  
     users.forEach((m: User) => {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
@@ -94,6 +100,9 @@ export class UserHandler {
       })
       .on('close', function () {
         console.log('Stream closed')
+        if(users.length == 0) {
+          callback(null, users)
+        }
       })
       .on('end', function () {
         console.log('Stream ended')
@@ -105,6 +114,7 @@ export class UserHandler {
     this.db.createReadStream()
       .on('data', function (data) {
         let key = data.key.split('_')[1]
+        console.log("YES")
         if (key == email) {
           self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
             if (!err) {
@@ -136,8 +146,10 @@ export class UserHandler {
 
   public remove(email: string, callback: (error: Error | null) => void) {
     let self = this.metricsDB;
+    console.log("remove")
     this.getUser(email, (err: Error | null, result: User | null) => {
       if (!err) {
+        console.log(result)
         if (result != undefined && result != null) {
           let metrics: Metric[] = result.getMetrics()
           this.db.del(`user_${result.getEmail()}`, function (err) {
@@ -146,7 +158,12 @@ export class UserHandler {
             }
             else {
               if (metrics.length > 0) {
-                self.del('metrics_' + email, (err: Error | null, result: Metric[] | null) => {
+                self.del('metrics_' + email, metrics, (err: Error | null, result: Metric[] | null) => {
+                  if (err) throw err
+                  else console.log("DONE DELETING")
+                });
+              } else {
+                self.del('metrics_' + email, [], (err: Error | null, result: Metric[] | null) => {
                   if (err) throw err
                   else console.log("DONE DELETING")
                 });
@@ -156,6 +173,7 @@ export class UserHandler {
           });
         }
       } else {
+        console.log(err)
         callback(err)
       };
     });
@@ -180,7 +198,10 @@ export class UserHandler {
   }
 
   public updateUserMetric(keyMetric: string, newMetric: Metric, callback: (error: Error | null) => void) {
-    this.metricsDB.updateOne(keyMetric, newMetric, (err: Error | null, result: Metric[] | null) => {
+    console.log("KEY METRIC BITCH")
+    console.log(keyMetric)
+    console.log("||||||||||||||||||||||||||||||||||||")
+    this.metricsDB.add(keyMetric.split('_')[0] + '_' + keyMetric.split('_')[1], [newMetric], (err: Error | null, result: Metric[] | null) => {
       if (err) throw err
       else console.log("DONE DELETING")
     });
@@ -194,7 +215,8 @@ export class UserHandler {
     this.metricsDB.setFilterDeleteMetric(keyTimestamp, keyHeight, keyWeight);
   }
 
-  public close() {
-    this.db.close()
+  public close(callback: (error: Error | null) => void) {
+    this.db.close();
+    callback(null);
   }
 }

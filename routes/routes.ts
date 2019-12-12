@@ -1,7 +1,7 @@
 import { User, UserHandler } from '../src/user'
 import { Metric } from '../src/metrics';
 
-const db = new UserHandler('./db/users')
+const db = new UserHandler('./db/users', './db/metrics')
 
 function printHomepage(req: any, res: any) {
     console.log("-----------------------")
@@ -41,6 +41,7 @@ function checkCredentials(req: any, res: any) {
                 } else {
                     console.log('callback result is null')
                 }
+                console.log("connected")
                 if (connected) {
                     req.session.loggedIn = true
                     req.session.user = userConnected
@@ -93,8 +94,6 @@ function checkCredentials(req: any, res: any) {
         }
 
     }
-
-    console.log("snif")
 }
 
 function printProfile(req: any, res: any) {
@@ -118,6 +117,8 @@ function logout(req: any, res: any) {
 }
 
 function deleteProfile(req: any, res: any) {
+    console.log("DELETE PROFILE")
+    console.log(req.session.user.email);
     db.remove(req.session.user.email, (err: Error | null) => {
         if (err) throw err
         else {
