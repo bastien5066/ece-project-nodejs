@@ -58,7 +58,7 @@ export class MetricsHandler {
     stream.end()
   }
 
-  public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => Metric[]) {
+  public getAllMetrics(keyUser: string, callback: (error: Error | null, result: Metric[] | null) => void ) {
     // Read
     let metrics: Metric[] = []
     let self = this;
@@ -211,5 +211,9 @@ export class MetricsHandler {
     this.filterHeightUpdate = keyHeight.toString();
     this.filterWeightUpdate = keyWeight.toString();
     this.filterChoice = "update";
+  }
+
+  public close() {
+    this.db.close()
   }
 }

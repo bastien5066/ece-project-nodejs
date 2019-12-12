@@ -4,7 +4,6 @@
     "description": "ECE Paris - NodeJS Project ",
     "main": "server.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "build": "./node_modules/.bin/tsc -p tsconfig.json",
         "start": "./node_modules/.bin/ts-node src/server.ts",
         "populate": "./node_modules/.bin/ts-node bin/populate.ts",
@@ -48,6 +47,7 @@
     },
     "dependencies": {
         "chart.js": "^2.9.3",
+        "del": "^5.1.0",
         "express-mysql-session": "^2.1.0",
         "json-js": "^1.1.2",
         "level": "^6.0.0",

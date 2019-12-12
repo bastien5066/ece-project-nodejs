@@ -193,4 +193,8 @@ export class UserHandler {
   public setFilterDeleteMetric(keyTimestamp: string, keyHeight: string, keyWeight: string) {
     this.metricsDB.setFilterDeleteMetric(keyTimestamp, keyHeight, keyWeight);
   }
+
+  public close() {
+    this.db.close()
+  }
 }
