@@ -25,8 +25,7 @@ The project in itself is a simple web API with a dashboard composed of :
     - Pre-populate the database with 3 users and their own metrics
 
 ## Install 
-This project uses node and npm. Go check them out if you don't have them locally installed.
-
+This project uses node and npm. Go check them out if you don't have them locally installed.  
 To check if you have Node.js installed, run this command in your terminal: 
 
 ```sh
@@ -51,6 +50,22 @@ $ npm install
 ```
 
 ## Usage 
+
+##### Populate database
+Go to the project directory, and run : 
+
+```sh
+$ npm run populate
+```
+
+#####  Start project - Test environment
+Go to the project directory, and run : 
+
+```sh
+$ npm run test
+```
+
+##### Start project - Dev environment
 Go to the project directory, and run either : 
 
 ```sh
@@ -68,6 +83,7 @@ Then, open your Internet browser and enter the following URL :
 $ http://localhost:8080/
 ```
 
+
 ## Grading 
 [NodeJS notation](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
 
@@ -81,7 +97,6 @@ DevOps grading criterias :
 
 ## Enjoy our program
 
-You are done ! You are free to use this application !
-
+You are done ! You are free to use this application !  
 I hope you will enjoy it !
 
