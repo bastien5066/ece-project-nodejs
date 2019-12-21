@@ -9,7 +9,6 @@
 **Promotion** - 2021  
 **Contributors** - Bastien LE GUERN Matthieu LELEU
 
-![alt text](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)
 ## Project introduction 
 The project in itself is a simple web API with a dashboard composed of :
 * ##### API side  
