@@ -1,4 +1,5 @@
 # ECE Paris - Final Project NodeJS 
+![alt text](https://talentsdunumerique.com/sites/default/files/public/logo-ece-2018.jpg)
 
 ## Information
 **ECE Paris S7** - NodeJS Project  
@@ -94,6 +95,14 @@ DevOps grading criterias :
 - Configure your project to use a CI server
 - Provide a "README" file explaining how to launch the project, how to launch the tests, what problems your had
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
+
+
+## Acknowledgments
+* StackOverflow
+* Sergei KUDINOV
+* Grégor JOUET
 
 ## Enjoy our program
 
