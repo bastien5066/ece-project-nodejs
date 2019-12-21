@@ -100,3 +100,4 @@ DevOps grading criterias :
 You are done ! You are free to use this application !  
 I hope you will enjoy it !
 
+![alt text](https://miro.medium.com/max/1200/0*_pH5lSWLo3c4uUlT.png)
