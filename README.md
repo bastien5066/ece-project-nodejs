@@ -25,7 +25,7 @@ The project in itself is a simple web API with a dashboard composed of :
     - Pre-populate the database with 3 users and their own metrics
 
 ## Install 
-This project uses node and npm. Go check them out if you don't have them locally installed.  
+This project uses node and npm. Go check them out if you don't have them locally installed.    
 To check if you have Node.js installed, run this command in your terminal: 
 
 ```sh
