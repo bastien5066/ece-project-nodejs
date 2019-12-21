@@ -51,21 +51,21 @@ $ npm install
 
 ## Usage 
 
-##### Populate database
+* ##### Populate database
 Go to the project directory, and run : 
 
 ```sh
 $ npm run populate
 ```
 
-#####  Start project - Test environment
+* #####  Start project - Test environment
 Go to the project directory, and run : 
 
 ```sh
 $ npm run test
 ```
 
-##### Start project - Dev environment
+* ##### Start project - Dev environment
 Go to the project directory, and run either : 
 
 ```sh
