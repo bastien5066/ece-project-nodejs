@@ -1,20 +1,27 @@
 # ECE Paris - Final Project NodeJS 
+
+## Information
 ECE Paris S7 - NodeJS Project - Web Technology course
+Course : Web Technology - NodeJS
+Teacher : Seirgei KUDINOV
+Deadline : 24/12/19
+Promotion : 2021
+Contributors : Bastien LE GUERN Matthieu LELEU
 
 
-## Introduction 
+## Project introduction 
 The project in itself is a simple web API with a dashboard composed of :
-    ** API side ** 
+    ###API side  
     - Authenticate 
     - CRUD users 
     - CRUD metrics' user 
-    ** Front side ** 
+    ###Front side 
     - Homepage
     - Sign In/Sign Up/Sign Out
     - Insert/Update/Delete metrics once logged in
     - Retrieve the user’s metrics and display it on a Graph 
     - Only access the user’s metrics, not the other ones
-    **  Utils ** 
+    ###Utils 
     - Pre-populate the database with 3 users and their own metrics
 
 ## Install 
@@ -65,7 +72,3 @@ You are done ! You are free to use this application !
 
 I hope you will enjoy it !
 
-## Contributors
-Bastien LE GUERN
-
-Matthieu LELEU
