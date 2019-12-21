@@ -1,12 +1,12 @@
 # ECE Paris - Final Project NodeJS 
 
 ## Information
-ECE Paris S7 - NodeJS Project  
-Courses : Web Technology - NodeJS & DevOps-RSE  
-Teachers : Sergei KUDINOV &  Grégor JOUET  
-Deadline : 24/12/19  
-Promotion : 2021  
-Contributors : Bastien LE GUERN Matthieu LELEU
+**ECE Paris S7** - NodeJS Project  
+**Courses** - Web Technology - NodeJS & DevOps-RSE  
+**Teachers** - Sergei KUDINOV &  Grégor JOUET  
+**Deadline** - 24/12/19  
+**Promotion** - 2021  
+**Contributors** - Bastien LE GUERN Matthieu LELEU
 
 
 ## Project introduction 
