@@ -85,7 +85,7 @@ $ http://localhost:8080/
 
 
 ## Grading 
-[NodeJS notation](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
+NodeJS grading criterias : [here](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
 
 DevOps grading criterias : 
 - Use git, use branches, use tags 
