@@ -11,17 +11,17 @@ Contributors : Bastien LE GUERN Matthieu LELEU
 
 ## Project introduction 
 The project in itself is a simple web API with a dashboard composed of :
-### API side  
+##### API side  
     - Authenticate 
     - CRUD users 
     - CRUD metrics' user 
-### Front side 
+##### Front side 
     - Homepage
     - Sign In/Sign Up/Sign Out
     - Insert/Update/Delete metrics once logged in
     - Retrieve the user’s metrics and display it on a Graph 
     - Only access the user’s metrics, not the other ones
-### Utils 
+##### Utils 
     - Pre-populate the database with 3 users and their own metrics
 
 ## Install 
