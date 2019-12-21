@@ -1,9 +1,9 @@
 # ECE Paris - Final Project NodeJS 
 
 ## Information
-ECE Paris S7 - NodeJS Project - Web Technology course
-Course : Web Technology - NodeJS
-Teacher : Seirgei KUDINOV
+ECE Paris S7 - NodeJS Project
+Courses : Web Technology - NodeJS & DevOps-RSE
+Teachers : Sergei KUDINOV &  Grégor JOUET
 Deadline : 24/12/19
 Promotion : 2021
 Contributors : Bastien LE GUERN Matthieu LELEU
@@ -67,6 +67,11 @@ Then, open your Internet browser and enter the following URL :
  ```sh
 $ http://localhost:8080/
 ```
+
+## Grading 
+NodeJS notation : [see this relative link for notation](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
+
+## Enjoy our program
 
 You are done ! You are free to use this application !
 
