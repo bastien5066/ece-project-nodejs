@@ -9,7 +9,7 @@
 **Promotion** - 2021  
 **Contributors** - Bastien LE GUERN Matthieu LELEU
 
-
+![alt text](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)
 ## Project introduction 
 The project in itself is a simple web API with a dashboard composed of :
 * ##### API side  
@@ -23,7 +23,7 @@ The project in itself is a simple web API with a dashboard composed of :
     - Retrieve the user’s metrics and display it on a Graph 
     - Only access the user’s metrics, not the other ones
 * ##### Utils 
-    - Pre-populate the database with 3 users and their own metrics
+    - Pre-populate the database with at least 2 users and their own metrics
 
 ## Install 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
@@ -52,7 +52,7 @@ $ npm install
 
 ## Usage 
 
-* ##### Populate database
+* ##### Pre-populate database
 Go to the project directory, and run : 
 
 ```sh
@@ -94,6 +94,9 @@ DevOps grading criterias :
 - Project uses external dependencies such as a database, use docker-compose to start it before the test session.
 - Configure your project to use a CI server
 - Provide a "README" file explaining how to launch the project, how to launch the tests, what problems your had
+
+## Problems encountered
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
