@@ -1,6 +1,8 @@
-# ece-project-nodejs
+# ECE Paris - Final Project NodeJS 
 ECE Paris S7 - NodeJS Project - Web Technology course
 
+
+## Introduction 
 The project in itself is a simple web API with a dashboard composed of :
     ** API side ** 
     - Authenticate 
@@ -47,7 +49,7 @@ Go to the project directory, and run either :
 ```sh
 $ npm start
 ```
-or this to run NodeJS with NoDemon
+or this to run NodeJS with NoDemon :
 
 ```sh
 $ npm run dev
