@@ -1,11 +1,11 @@
 # ECE Paris - Final Project NodeJS 
 
 ## Information
-ECE Paris S7 - NodeJS Project
-Courses : Web Technology - NodeJS & DevOps-RSE
-Teachers : Sergei KUDINOV &  Grégor JOUET
-Deadline : 24/12/19
-Promotion : 2021
+ECE Paris S7 - NodeJS Project  
+Courses : Web Technology - NodeJS & DevOps-RSE  
+Teachers : Sergei KUDINOV &  Grégor JOUET  
+Deadline : 24/12/19  
+Promotion : 2021  
 Contributors : Bastien LE GUERN Matthieu LELEU
 
 
@@ -69,7 +69,15 @@ $ http://localhost:8080/
 ```
 
 ## Grading 
-NodeJS notation : [see this relative link for notation](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
+[NodeJS notation](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
+
+DevOps grading criterias : 
+- Use git, use branches, use tags 
+- Project must have tests with a testing framework (depending on the language used)
+- Project uses external dependencies such as a database, use docker-compose to start it before the test session.
+- Configure your project to use a CI server
+- Provide a "README" file explaining how to launch the project, how to launch the tests, what problems your had
+
 
 ## Enjoy our program
 
