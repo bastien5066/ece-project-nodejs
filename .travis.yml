@@ -8,6 +8,7 @@ node_js:
   - node
 services:
   - leveldb
+language: generic
 env: 
   - NODE_ENV = dev
   - NODE_ENV = test
