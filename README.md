@@ -7,7 +7,7 @@
 **Teachers** - Sergei KUDINOV &  Grégor JOUET  
 **Deadline** - 24/12/19  
 **Promotion** - 2021  
-**Contributors** - Bastien LE GUERN Matthieu LELEU
+**Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute) 
 
 [![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
 
@@ -108,13 +108,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * StackOverflow
 * Sergei KUDINOV
 * Grégor JOUET
-
-
-## Collaborators
-Bastien LE GUERN
-<img src="https://avatars2.githubusercontent.com/u/57364154?s=400&v=4" width="200" height="200" /> 
-Matthieu LELEU
-<img src="https://avatars3.githubusercontent.com/u/36449292?s=400&v=4" width="200" height="200" /> 
 
 ## Enjoy our program
 
