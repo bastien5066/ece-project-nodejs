@@ -16,7 +16,6 @@ install:
 script:
   - npm run populate
   - npm run test
-  - npm run dev
 deploy:
   skip-cleanup: true
   github_token: $GITHUB_TOKEN
