@@ -9,7 +9,9 @@
 **Promotion** - 2021  
 **Contributors** - Bastien LE GUERN Matthieu LELEU
 
-## Project introduction 
+[![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
+
+## Overview
 The project in itself is a simple web API with a dashboard composed of :
 * ##### API side  
     - Authenticate 
@@ -112,5 +114,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 You are done ! You are free to use this application !  
 I hope you will enjoy it !
 
-![alt text](https://badge.fury.io/%7B%7Bprogramming_language:js%7D%7D/%7B%7Bproject_name%7D%7D.svg)
 
