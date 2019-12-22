@@ -114,15 +114,15 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                 dbMet.removeOne('metrics_' + updatedMetric.getTimestamp(), (err: Error | null) => {
                     expect(err).to.be.null;
                     done()
-                });
+                    it('should GET empty array after deletion', function (done) {
+                        dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
+                            expect(err).to.be.null;
+                            expect(result).to.not.be.undefined;
+                            expect(result).to.be.empty;
+                            done()
+                        });
 
-            });
-            it('should GET empty array after deletion', function (done) {
-                dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
-                    expect(err).to.be.null;
-                    expect(result).to.not.be.undefined;
-                    expect(result).to.be.empty;
-                    done()
+                    });
                 });
 
             });
@@ -271,9 +271,9 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                             expect(user.getUsername()).to.be.oneOf(['test1', 'test2', 'test3']);
 
                             expect(user.getPassword()).to.be.a('string');
-                            if(user.getUsername() == 'test1') expect(bcrypt.compareSync("password1", user.getPassword())).to.equal(true);
-                            else if(user.getUsername() == 'test2') expect(bcrypt.compareSync("password2", user.getPassword())).to.equal(true);
-                            else if(user.getUsername() == 'test3') expect(bcrypt.compareSync("password3", user.getPassword())).to.equal(true);                            
+                            if (user.getUsername() == 'test1') expect(bcrypt.compareSync("password1", user.getPassword())).to.equal(true);
+                            else if (user.getUsername() == 'test2') expect(bcrypt.compareSync("password2", user.getPassword())).to.equal(true);
+                            else if (user.getUsername() == 'test3') expect(bcrypt.compareSync("password3", user.getPassword())).to.equal(true);
                             expect(bcrypt.compareSync("anythingElse", user.getPassword())).to.equal(false);
 
                             expect(user.getMetrics()).to.not.be.empty;
@@ -296,10 +296,10 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
             });
         });
         let updatedUsers: User[] = [
-            new User('test1@email.fr', "updatedUser1", "updatedPassword1", [new Metric("Test1.0", 10, 11), new Metric("Test1.1",52, 9)], false),
+            new User('test1@email.fr', "updatedUser1", "updatedPassword1", [new Metric("Test1.0", 10, 11), new Metric("Test1.1", 52, 9)], false),
             new User('test2@email.fr', "updatedUser2", "updatedPassword2", [new Metric("Test2.0", 99, 41), new Metric("Test2.1", 65, 22)], false),
             new User('test3@email.fr', "updatedUser3", "updatedPassword3", [new Metric("Test3.0", 52, 5), new Metric("Test3.1", 69, 33)], false),
-        ]  
+        ]
         describe('#update and #get', function () {
             it('should UPDATE some users data and their metrics in the database', function (done) {
                 dbUser.add(updatedUsers, (err: Error | null) => {
@@ -328,9 +328,9 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                             expect(user.getUsername()).to.be.oneOf(['updatedUser1', 'updatedUser2', 'updatedUser3']);
 
                             expect(user.getPassword()).to.be.a('string');
-                            if(user.getUsername() == 'updatedUser1') expect(bcrypt.compareSync("updatedPassword1", user.getPassword())).to.equal(true);
-                            else if(user.getUsername() == 'updatedUser2') expect(bcrypt.compareSync("updatedPassword2", user.getPassword())).to.equal(true);
-                            else if(user.getUsername() == 'updatedUser3') expect(bcrypt.compareSync("updatedPassword3", user.getPassword())).to.equal(true);                            
+                            if (user.getUsername() == 'updatedUser1') expect(bcrypt.compareSync("updatedPassword1", user.getPassword())).to.equal(true);
+                            else if (user.getUsername() == 'updatedUser2') expect(bcrypt.compareSync("updatedPassword2", user.getPassword())).to.equal(true);
+                            else if (user.getUsername() == 'updatedUser3') expect(bcrypt.compareSync("updatedPassword3", user.getPassword())).to.equal(true);
                             expect(bcrypt.compareSync("anythingElse", user.getPassword())).to.equal(false);
 
                             expect(user.getMetrics()).to.not.be.empty;
@@ -364,9 +364,9 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                     expect(err).to.be.null;
                     expect(result).to.not.be.undefined;
                     expect(result).to.be.empty;
-                    done()                   
+                    done()
                 });
-               
+
             });
         });
     });
