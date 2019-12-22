@@ -150,8 +150,7 @@ DevOps grading criterias :
 * Github's branches management
 * Testing phase & compatibility with LevelDB (IO Error with LOCK)
 * Setting up the README file correctly
-* Testing in containerisation : problems occured between the container and leveldb. It seemed that leveldb couldn't create and  
-  access the leveldb folder that should contain data.
+* Testing in containerisation : problems occured between the container and leveldb. It seemed that leveldb couldn't create and access the leveldb folder that    should contain data. Below is the problem encountered in Docker Quickstart Terminal :
     ```sh
     Uncaught OpenError: IO error: ./db_test/users/LOCK: No such file or directory 
     ```
