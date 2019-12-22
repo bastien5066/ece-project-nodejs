@@ -117,16 +117,17 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                 });
 
             });
-            it('should GET empty array after deletion', function (done) {
-                dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
-                    expect(err).to.be.null;
-                    expect(result).to.not.be.undefined;
-                    expect(result).to.be.empty;
-                    done()
+            setTimeout(function(){ 
+                it('should GET empty array after deletion', function (done) {
+                    dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
+                        expect(err).to.be.null;
+                        expect(result).to.not.be.undefined;
+                        expect(result).to.be.empty;
+                        done()
+                    });
+    
                 });
-
-            });
-
+        }, 500);          
         });
         describe('#removeAll and #get', function () {
             let metrics: Metric[] = [new Metric('TestMetric1', 1, 1), new Metric('TestMetric2', 1, 1), new Metric('TestMetric3', 1, 1)]
