@@ -53,7 +53,7 @@ Go to the project directory and install the depedencies required for this projec
 ```sh
 $ npm install
 ```
-## Usage 
+### Usage 
 
 * ##### Pre-populate database
 Go to the project directory, and run : 
@@ -112,14 +112,17 @@ Now run the container :
 $ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
 ```
 
-Finally, open your Internet browser and enter the following URL for Windows OS:
+### Usage 
+
+Open your Internet browser and, if no errors were thrown during the installation :  
+The application is accessible for Windows OS at the URL:
 
 ```sh
 http://192.168.99.100:[PORT-CHOSEN]/
 
 ```
 
-or this command for other Docker's supported OS :
+The application is accessible for other Docker's supported OS at the URL:
 
 ```sh
 http://localhost:[PORT-CHOSEN]/
