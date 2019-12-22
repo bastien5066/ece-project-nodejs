@@ -90,8 +90,8 @@ $ http://localhost:8080/
 ```
 
 ## Dependencies
-<img src="https://david-dm.org/{{username}}/{{project_name}}.svg">
-
+<img src="https://david-dm.org/boennemann/badges.svg">
+<img src="https://david-dm.org/boennemann/badges/dev-status.svg">
 
 ## Grading 
 NodeJS grading criterias : [here](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
