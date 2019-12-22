@@ -115,7 +115,7 @@ $ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
 Finally, open your Internet browser and enter the following URL :
 
 ```sh
-http://192.168.99.100:8080/
+http://192.168.99.100:[PORT-CHOSEN]/
 
 ```
 
