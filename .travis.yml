@@ -10,8 +10,7 @@ node_js:
   - node
 services:
   - leveldb
-env: 
-  - NODE_ENV = dev
+matrix:
   - NODE_ENV = test
 install:
   - npm install
