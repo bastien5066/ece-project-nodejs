@@ -16,5 +16,3 @@ install:
   - npm install
 script:
   - npm run populate
-deploy:
-  github_token: $GITHUB_TOKEN
