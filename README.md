@@ -8,7 +8,6 @@
 **Deadline** - 24/12/19  
 **Promotion** - 2021  
 **Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute)   
-[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 
 ## Overview
 The project in itself is a simple web API with a dashboard composed of :
@@ -120,6 +119,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 You are done ! You are free to use this application !  
 I hope you will enjoy it !
+
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](http://forthebadge.com)
 
