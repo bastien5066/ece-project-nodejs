@@ -103,7 +103,9 @@ DevOps grading criterias :
 
 ## Problems encountered
 * Configuration of Travis CI
-* Containerisation
+* Docker containerisation
+* Testing phase & compatibility with LevelDB (IO Error with LOCK)
+* Setting up the README file 
 
 ## License
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
