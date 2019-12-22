@@ -1,8 +1,21 @@
 language: node_js
 node_js:
-  - "v12.13.0"
+  - v12.12.17
+  - v12.12.13
+  - v8
 services:
   - leveldb
 env: 
   - NODE_ENV = dev
   - NODE_ENV = test
+install:
+  - npm install
+script:
+  - npm run populate
+  - npm run test
+  - npm run dev
+deploy:
+  skip-cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
