@@ -27,7 +27,7 @@ The project in itself is a simple web API with a dashboard composed of :
 ## Specification
 * Continuous testing Travis CI : [![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
 * Coverage : [![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_90.svg)](https://coveralls.io/r/boennemann/badges)
-* Stable release version: ![version](https://img.shields.io/badge/version-4.3-blue)
+* Stable release version: ![version](https://img.shields.io/badge/version-4.3.1-blue)
 
 ## Installation - Without Docker 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
