@@ -89,6 +89,10 @@ Then, open your Internet browser and enter the following URL :
 $ http://localhost:8080/
 ```
 
+## Dependencies
+[![dependencies Status](https://david-dm.org/request/request/status.svg)](https://david-dm.org/request/request)
+[![devDependencies Status](https://david-dm.org/request/request/dev-status.svg)](https://david-dm.org/request/request?type=dev)
+
 
 ## Grading 
 NodeJS grading criterias : [here](https://github.com/adaltas/ece-nodejs/blob/2019-fall-5-modules/PROJECT.md)
@@ -108,7 +112,6 @@ DevOps grading criterias :
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)  
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
-
 
 ## Acknowledgments
 * StackOverflow
