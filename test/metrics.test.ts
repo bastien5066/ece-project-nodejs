@@ -2,11 +2,11 @@ import { expect } from 'chai'
 import { User, UserHandler } from '../src/user'
 import { Metric, MetricsHandler } from '../src/metrics'
 import { LevelDB } from "../src/leveldb"
-import { callbackify } from 'util'
 
 const dbPath: string = './db_test/'
 const dbPathMetrics: string = './db_test/metrics'
 const dbPathUsers: string = './db_test/users'
+const bcrypt = require('bcryptjs');
 var dbMet: MetricsHandler
 var dbUser: UserHandler
 
@@ -169,7 +169,7 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
 
             });
         });
-        let oneUser: User = new User('test@email.fr', "test", "password", [new Metric("Test", 1, 1), new Metric("Test2", 25, 14)])
+        let oneUser: User = new User('test@email.fr', "test", "password", [new Metric("Test", 1, 1), new Metric("Test2", 25, 14)], false)
         describe('#add and #get - One user', function () {
             it('should add a user and his metrics in the database', function (done) {
                 dbUser.add([oneUser], (err: Error | null) => {
@@ -198,7 +198,8 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                             expect(element.getUsername()).to.equal('test');
 
                             expect(element.getPassword()).to.be.a('string');
-                            expect(element.getPassword()).to.equal('password');
+                            expect(bcrypt.compareSync("password", element.getPassword())).to.equal(true);
+                            expect(bcrypt.compareSync("anythingElse", element.getPassword())).to.equal(false);
 
                             expect(element.getMetrics()).to.not.be.empty;
                             expect(element.getMetrics()).to.be.a('array');
@@ -237,9 +238,9 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
             });
         });
         let user: User[] = [
-            new User('test1@email.fr', "test1", "password1", [new Metric("Test1.0", 1, 1), new Metric("Test1.1", 25, 14)]),
-            new User('test2@email.fr', "test2", "password2", [new Metric("Test2.0", 45, 4), new Metric("Test2.1", 65, 55)]),
-            new User('test3@email.fr', "test3", "password3", [new Metric("Test3.0", 56, 44), new Metric("Test3.1", 99, 74)]),
+            new User('test1@email.fr', "test1", "password1", [new Metric("Test1.0", 1, 1), new Metric("Test1.1", 25, 14)], false),
+            new User('test2@email.fr', "test2", "password2", [new Metric("Test2.0", 45, 4), new Metric("Test2.1", 65, 55)], false),
+            new User('test3@email.fr', "test3", "password3", [new Metric("Test3.0", 56, 44), new Metric("Test3.1", 99, 74)], false),
         ]
         describe('#add and #get - Several users', function () {
 
@@ -270,7 +271,10 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                             expect(user.getUsername()).to.be.oneOf(['test1', 'test2', 'test3']);
 
                             expect(user.getPassword()).to.be.a('string');
-                            expect(user.getPassword()).to.be.oneOf(['password1', 'password2', 'password3']);
+                            if(user.getUsername() == 'test1') expect(bcrypt.compareSync("password1", user.getPassword())).to.equal(true);
+                            else if(user.getUsername() == 'test2') expect(bcrypt.compareSync("password2", user.getPassword())).to.equal(true);
+                            else if(user.getUsername() == 'test3') expect(bcrypt.compareSync("password3", user.getPassword())).to.equal(true);                            
+                            expect(bcrypt.compareSync("anythingElse", user.getPassword())).to.equal(false);
 
                             expect(user.getMetrics()).to.not.be.empty;
                             expect(user.getMetrics()).to.be.a('array');
@@ -292,9 +296,9 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
             });
         });
         let updatedUsers: User[] = [
-            new User('test1@email.fr', "updatedUser1", "updatedPassword1", [new Metric("Test1.0", 10, 11), new Metric("Test1.1",52, 9)]),
-            new User('test2@email.fr', "updatedUser2", "updatedPassword2", [new Metric("Test2.0", 99, 41), new Metric("Test2.1", 65, 22)]),
-            new User('test3@email.fr', "updatedUser3", "updatedPassword3", [new Metric("Test3.0", 52, 5), new Metric("Test3.1", 69, 33)]),
+            new User('test1@email.fr', "updatedUser1", "updatedPassword1", [new Metric("Test1.0", 10, 11), new Metric("Test1.1",52, 9)], false),
+            new User('test2@email.fr', "updatedUser2", "updatedPassword2", [new Metric("Test2.0", 99, 41), new Metric("Test2.1", 65, 22)], false),
+            new User('test3@email.fr', "updatedUser3", "updatedPassword3", [new Metric("Test3.0", 52, 5), new Metric("Test3.1", 69, 33)], false),
         ]  
         describe('#update and #get', function () {
             it('should UPDATE some users data and their metrics in the database', function (done) {
@@ -324,7 +328,10 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                             expect(user.getUsername()).to.be.oneOf(['updatedUser1', 'updatedUser2', 'updatedUser3']);
 
                             expect(user.getPassword()).to.be.a('string');
-                            expect(user.getPassword()).to.be.oneOf(['updatedPassword1', 'updatedPassword2', 'updatedPassword3']);
+                            if(user.getUsername() == 'updatedUser1') expect(bcrypt.compareSync("updatedPassword1", user.getPassword())).to.equal(true);
+                            else if(user.getUsername() == 'updatedUser2') expect(bcrypt.compareSync("updatedPassword2", user.getPassword())).to.equal(true);
+                            else if(user.getUsername() == 'updatedUser3') expect(bcrypt.compareSync("updatedPassword3", user.getPassword())).to.equal(true);                            
+                            expect(bcrypt.compareSync("anythingElse", user.getPassword())).to.equal(false);
 
                             expect(user.getMetrics()).to.not.be.empty;
                             expect(user.getMetrics()).to.be.a('array');

@@ -46,11 +46,15 @@
         "typescript": "^3.7.3"
     },
     "dependencies": {
+        "bcrypt": "^2.0.1",
+        "bcryptjs": "^2.4.3",
         "chart.js": "^2.9.3",
+        "crypto": "^1.0.1",
         "del": "^5.1.0",
         "express-mysql-session": "^2.1.0",
         "json-js": "^1.1.2",
         "level": "^6.0.0",
-        "level-session-store": "^2.2.0"
+        "level-session-store": "^2.2.0",
+        "md5": "^2.2.1"
     }
 }
