@@ -55,7 +55,6 @@ export class UserHandler {
       callback(err)
     }).on('close', function(err) {
       if(err) {
-        console.log("non ??")
       }
       callback(null)
     })
@@ -68,9 +67,7 @@ export class UserHandler {
 
       });
     });
-    console.log("wzaaaa");
     stream.end()
-    console.log("ended")
   }
 
   public addUser(users: User[], callback: (error: Error | null) => void) {

@@ -66,7 +66,7 @@ $ npm run populate
 Go to the project directory, and run : 
 
 ```sh
-$ npm run test
+$ npm test
 ```
 
 * ##### Start project - Dev environment

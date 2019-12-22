@@ -123,7 +123,6 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
             });
             it('should GET empty array after deletion', function (done) {
                 dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
-                    console.log(err)
                     expect(err).to.be.null;
                     expect(result).to.not.be.undefined;
                     expect(result).to.be.empty;
