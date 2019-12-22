@@ -19,6 +19,10 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
         dbMet = dbUser.getMetricsHandler()
     });
 
+    afterEach(function () {
+        setTimeout(function () { }, 200)
+    });
+
     after(function () {
         dbMet.close((err: Error | null) => {
             if (err) throw err
