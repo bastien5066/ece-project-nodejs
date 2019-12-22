@@ -57,12 +57,10 @@ export class UserHandler {
       callback(null)
     })
     users.forEach((m: User) => {
-      console.log("Ici on write : ")
-      console.log(m)
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) throw err
-        console.log(" => metrics added")
+
       })
     })
     stream.end()
@@ -88,8 +86,6 @@ export class UserHandler {
     let self = this.metricsDB;
     this.db.createReadStream()
       .on('data', function (data) {
-        console.log("ALL RECORDS MAN")
-        console.log(data)
         counter += 1;
         self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
           if (!err) {
@@ -98,9 +94,7 @@ export class UserHandler {
             } else {
               users.push(new User(data.value.email, data.value.username, data.value.password, [], true))
             }
-          } else {
-            console.log(err)
-          }
+          } 
           if (counter == users.length) {
             callback(null, users)
           }
@@ -129,9 +123,7 @@ export class UserHandler {
               } else {
                 foundUser = new User(data.value.email, data.value.username, data.value.password, [], true)
               }
-            } else {
-              console.log(err)
-            }
+            } 
             if (foundUser != undefined) {
               callback(null, foundUser)
             }
@@ -139,7 +131,6 @@ export class UserHandler {
         }
       })
       .on('error', function (err) {
-        console.log('Oh my!', err)
         callback(err, null)
       })
   }
@@ -172,7 +163,6 @@ export class UserHandler {
             callback(null)
           }
         } else {
-          console.log(err)
           callback(err)
         };
       });
@@ -197,12 +187,8 @@ export class UserHandler {
   }
 
   public updateUserMetric(keyMetric: string, newMetric: Metric, callback: (error: Error | null) => void) {
-    console.log("KEY METRIC BITCH")
-    console.log(keyMetric)
-    console.log("||||||||||||||||||||||||||||||||||||")
     this.metricsDB.add(keyMetric.split('_')[0] + '_' + keyMetric.split('_')[1], [newMetric], (err: Error | null, result: Metric[] | null) => {
       if (err) throw err
-      else console.log("DONE DELETING")
     });
   }
 

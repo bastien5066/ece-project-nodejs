@@ -149,7 +149,6 @@ export class MetricsHandler {
         callback(err, null)
       })
       .on('close', function () {
-        console.log("callback metrics")
         callback(null, metrics)
       })
   }

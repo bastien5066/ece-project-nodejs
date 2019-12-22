@@ -17,3 +17,4 @@ install:
 script:
   - npm run populate
   - npm run test
+  - npm start
