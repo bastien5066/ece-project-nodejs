@@ -1,5 +1,5 @@
 # ECE Paris - Final Project NodeJS 
-![alt text](https://talentsdunumerique.com/sites/default/files/public/logo-ece-2018.jpg)
+<img src="https://talentsdunumerique.com/sites/default/files/public/logo-ece-2018.jpg" height="200px">
 
 ## Information
 **ECE Paris S7** - NodeJS Project  
@@ -117,7 +117,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * Sergei KUDINOV
 * Grégor JOUET
 
-## Enjoy our program
+## Enjoy our program !
 
 You are done ! You are free to use this application !  
 I hope you will enjoy it !

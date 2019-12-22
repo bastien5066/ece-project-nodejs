@@ -10,6 +10,9 @@ node_js:
 env:
   global:
     - NODE_ENV=production
+before_install:
+  - npm install -g ts-node
+  - npm install -g typescript-
 install:
   - npm install
 script:
