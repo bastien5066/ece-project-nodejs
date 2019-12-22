@@ -53,40 +53,6 @@ Go to the project directory and install the depedencies required for this projec
 ```sh
 $ npm install
 ```
-
-## Installation - With Docker
-
-To copy this project on Desktop :
-
-```sh
-$ git clone "https://github.com/bastien5066/ece-project-nodejs.git"
-```
-Go to the project directory and run the following command :
-
-```sh
-$ docker build -t [PROJECT-NAME] .   
-```
-
-Check if the image is mounted :
-
-```sh
-$ docker images .   
-```
-
-Now run the container : 
-
-```sh
-$ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
-```
-
-Finally, open your Internet browser and enter the following URL :
-
-```sh
-http://192.168.99.100:8080/
-
-```
-
-
 ## Usage 
 
 * ##### Pre-populate database
@@ -119,6 +85,38 @@ Then, open your Internet browser and enter the following URL :
 
  ```sh
 http://localhost:8080/
+```
+
+## Installation - With Docker
+
+To copy this project on Desktop :
+
+```sh
+$ git clone "https://github.com/bastien5066/ece-project-nodejs.git"
+```
+Go to the project directory and run the following command :
+
+```sh
+$ docker build -t [PROJECT-NAME] .   
+```
+
+Check if the image is mounted :
+
+```sh
+$ docker images .   
+```
+
+Now run the container : 
+
+```sh
+$ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
+```
+
+Finally, open your Internet browser and enter the following URL :
+
+```sh
+http://192.168.99.100:8080/
+
 ```
 
 ## Dependencies
