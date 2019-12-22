@@ -7,7 +7,8 @@
 **Teachers** - Sergei KUDINOV &  Grégor JOUET  
 **Deadline** - 24/12/19  
 **Promotion** - 2021  
-**Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute) 
+**Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute)   
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 
 ## Overview
 The project in itself is a simple web API with a dashboard composed of :
@@ -105,7 +106,7 @@ DevOps grading criterias :
 
 ## License
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)  
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
 
 
@@ -128,6 +129,10 @@ I hope you will enjoy it !
 [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](http://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](http://forthebadge.com)
 
 [![forthebadge](https://forthebadge.com/images/badges/validated-html5.svg)](http://forthebadge.com)
 
