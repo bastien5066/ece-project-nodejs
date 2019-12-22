@@ -8,10 +8,6 @@ node_js:
   - 12
   - 13
   - node
-env:
-  global:
-    - NODE_ENV = dev
-    - NODE_ENV = test
 install:
   - npm install
 script:
