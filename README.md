@@ -26,9 +26,8 @@ The project in itself is a simple web API with a dashboard composed of :
 
 ## Specification
 * Continuous testing Travis CI : [![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
-* Stable release version: ![version](https://img.shields.io/badge/version-1.2.3-blue)
-
-
+* Coverage : [![Coverage Status](https://coveralls.io/repos/boennemann/badges/badge.svg)](https://coveralls.io/r/boennemann/badges)
+* Stable release version: ![version](https://img.shields.io/badge/version-4.1.1-blue)
 
 ## Install 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
@@ -105,6 +104,8 @@ DevOps grading criterias :
 * Containerisation
 
 ## License
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
 
 
@@ -118,5 +119,16 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 You are done ! You are free to use this application !  
 I hope you will enjoy it !
 
+[![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/validated-html5.svg)](http://forthebadge.com)
 
 
