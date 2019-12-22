@@ -112,9 +112,10 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Collaborators
 Bastien LE GUERN
-![alt text](https://avatars2.githubusercontent.com/u/57364154?s=400&v=4)  
+<img src="https://avatars2.githubusercontent.com/u/57364154?s=400&v=4" width="200" height="200" /> 
 Matthieu LELEU
-![alt text](https://avatars3.githubusercontent.com/u/36449292?s=400&v=4)  
+<img src="https://avatars3.githubusercontent.com/u/36449292?s=400&v=4" width="200" height="200" /> 
+
 ## Enjoy our program
 
 You are done ! You are free to use this application !  
