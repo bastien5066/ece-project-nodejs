@@ -7,18 +7,8 @@ const usr = [
   new User('test3@email.com', 'test3', 'password3', [new Metric('01-01-2019~10:10:30', 198, 80)], false),
 ]
 
-console.log(usr)
-
 const db = new UserHandler('./db/users', './db/metrics')
 
 db.add(usr, (err: Error | null) => {
-  console.log("elle est ou l'erreur")
-  if (err) {
-    console.log("-- throw err --")
-    throw err
-  } else {
-    console.log("wesh")
-  }
-  console.log("wtfff")
-  console.log('Data populated')
-})
+  if (err) throw err
+});

@@ -88,7 +88,7 @@ http://localhost:8080/
 ```
 
 ## Installation - With Docker
-
+**Does not include testing with npm test**  
 To copy this project on Desktop :
 
 ```sh
