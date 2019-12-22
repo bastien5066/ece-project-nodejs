@@ -117,16 +117,17 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
             it('should REMOVE THE EXISTING metric in the database with the SAME KEY as sent', function (done) {
                 dbMet.removeOne('metrics_' + updatedMetric.getTimestamp(), (err: Error | null) => {
                     expect(err).to.be.null;
-                    done()
-                    it('should GET empty array after deletion', function (done) {
-                        dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
-                            expect(err).to.be.null;
-                            expect(result).to.not.be.undefined;
-                            expect(result).to.be.empty;
-                            done()
-                        });
+                    done()                   
+                });
 
-                    });
+            });
+            it('should GET empty array after deletion', function (done) {
+                dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
+                    console.log(err)
+                    expect(err).to.be.null;
+                    expect(result).to.not.be.undefined;
+                    expect(result).to.be.empty;
+                    done()
                 });
 
             });
