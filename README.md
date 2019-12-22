@@ -147,8 +147,15 @@ DevOps grading criterias :
 ## Problems encountered
 * Configuration of Travis CI
 * Docker containerisation
+* Github's branches management
 * Testing phase & compatibility with LevelDB (IO Error with LOCK)
-* Setting up the README file 
+* Setting up the README file correctly
+* Testing in containerisation : problems occured between the container and leveldb. It seemed that leveldb couldn't create and  
+  access the leveldb folder that should contain data.
+    ```sh
+    Uncaught OpenError: IO error: ./db_test/users/LOCK: No such file or directory 
+    ```
+
 
 ## License
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
