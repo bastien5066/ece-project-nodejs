@@ -95,7 +95,8 @@ DevOps grading criterias :
 - Provide a "README" file explaining how to launch the project, how to launch the tests, what problems your had
 
 ## Problems encountered
-
+* Configuration of Travis CI
+* Containerisation
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
@@ -111,4 +112,5 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 You are done ! You are free to use this application !  
 I hope you will enjoy it !
 
-![alt text](https://miro.medium.com/max/1200/0*_pH5lSWLo3c4uUlT.png)
+![alt text](https://badge.fury.io/%7B%7Bprogramming_language:js%7D%7D/%7B%7Bproject_name%7D%7D.svg)
+
