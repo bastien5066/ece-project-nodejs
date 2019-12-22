@@ -1,11 +1,6 @@
 import { LevelDB } from "./leveldb"
 import WriteStream from 'level-ws'
 import { Metric, MetricsHandler } from '../src/metrics'
-import { CONNREFUSED } from "dns";
-import { callbackify } from "util";
-
-const bcrypt = require('bcryptjs');
-const salt = bcrypt.genSaltSync(10);
 
 export class User {
   private email: string
@@ -13,28 +8,27 @@ export class User {
   private password: string
   private metrics: Metric[] = []
 
-  constructor(mail: string, usr: string, psw: string, met: Metric[], passwordHashed: boolean) {
+  constructor(mail: string, usr: string, psw: string, met: Metric[]) {
     this.email = mail
     this.username = usr
-    if(!passwordHashed) this.password = bcrypt.hashSync(psw, salt); 
-    else this.password = psw;
+    this.password = psw
     this.metrics = met
   }
 
   public getEmail() {
-    return this.email;
+    return this.email
   }
   public getUsername() {
-    return this.username;
+    return this.username
   }
   public getPassword() {
-    return this.password;
+    return this.password
   }
   public getMetrics() {
-    return this.metrics;
+    return this.metrics
   }
   public addMetric(_met) {
-    this.metrics.push(_met);
+    this.metrics.push(_met)
   }
 }
 
@@ -53,19 +47,15 @@ export class UserHandler {
     const stream = WriteStream(this.db)
     stream.on('error', function (err) {
       callback(err)
-    }).on('close', function(err) {
-      callback(null)
     })
     users.forEach((m: User) => {
-      console.log("Ici on write : ")
-      console.log(m)
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) throw err
-        console.log(" => metrics added")
       })
     })
     stream.end()
+    callback(null)
   }
 
   public addUser(users: User[], callback: (error: Error | null) => void) {
@@ -88,20 +78,19 @@ export class UserHandler {
     let self = this.metricsDB;
     this.db.createReadStream()
       .on('data', function (data) {
-        console.log("ALL RECORDS MAN")
-        console.log(data)
         counter += 1;
         self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
           if (!err) {
             if (result != null) {
-              users.push(new User(data.value.email, data.value.username, data.value.password, result, true))
+              users.push(new User(data.value.email, data.value.username, data.value.password, result))
             } else {
-              users.push(new User(data.value.email, data.value.username, data.value.password, [], true))
+              users.push(new User(data.value.email, data.value.username, data.value.password, []))
             }
           } else {
             console.log(err)
           }
           if (counter == users.length) {
+            console.log("callback")
             callback(null, users)
           }
         });
@@ -125,9 +114,9 @@ export class UserHandler {
           self.getAllMetrics('metrics_' + data.value.email, (err: Error | null, result: Metric[] | null) => {
             if (!err) {
               if (result != null) {
-                foundUser = new User(data.value.email, data.value.username, data.value.password, result, true)
+                foundUser = new User(data.value.email, data.value.username, data.value.password, result)
               } else {
-                foundUser = new User(data.value.email, data.value.username, data.value.password, [], true)
+                foundUser = new User(data.value.email, data.value.username, data.value.password, [])
               }
             } else {
               console.log(err)
@@ -149,7 +138,7 @@ export class UserHandler {
     let that = this;
     let counter = 0;
     emailTab.forEach(function (email) {
-      that.getUser(email, (err: Error | null, result: User | null) => {
+      that.getUser(email, (err: Error | null, result: User | null) => {        
         if (!err) {
           if (result != undefined && result != null) {
             let metrics: Metric[] = result.getMetrics()
@@ -170,7 +159,7 @@ export class UserHandler {
               }
             });
             callback(null)
-          }
+          }          
         } else {
           console.log(err)
           callback(err)
