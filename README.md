@@ -112,12 +112,20 @@ Now run the container :
 $ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
 ```
 
-Finally, open your Internet browser and enter the following URL :
+Finally, open your Internet browser and enter the following URL for Windows OS:
 
 ```sh
 http://192.168.99.100:[PORT-CHOSEN]/
 
 ```
+
+or this command for other Docker's supported OS :
+
+```sh
+http://localhost:[PORT-CHOSEN]/
+
+```
+
 
 ## Dependencies
 <img src="https://david-dm.org/boennemann/badges.svg">  
