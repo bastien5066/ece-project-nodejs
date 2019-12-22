@@ -17,7 +17,4 @@ install:
 script:
   - npm run populate
 deploy:
-  skip-cleanup: true
   github_token: $GITHUB_TOKEN
-  on:
-    branch: master
