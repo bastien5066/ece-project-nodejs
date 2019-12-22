@@ -54,16 +54,23 @@ export class UserHandler {
     stream.on('error', function (err) {
       callback(err)
     }).on('close', function(err) {
+      if(err) {
+        console.log("non ??")
+      }
       callback(null)
     })
     users.forEach((m: User) => {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
-        if (err) throw err
+        if (err) {
+          throw err        
+        }
 
-      })
-    })
+      });
+    });
+    console.log("wzaaaa");
     stream.end()
+    console.log("ended")
   }
 
   public addUser(users: User[], callback: (error: Error | null) => void) {

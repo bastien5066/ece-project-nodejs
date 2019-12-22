@@ -12,6 +12,13 @@ console.log(usr)
 const db = new UserHandler('./db/users', './db/metrics')
 
 db.add(usr, (err: Error | null) => {
-  if (err) throw err
+  console.log("elle est ou l'erreur")
+  if (err) {
+    console.log("-- throw err --")
+    throw err
+  } else {
+    console.log("wesh")
+  }
+  console.log("wtfff")
   console.log('Data populated')
 })
