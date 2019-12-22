@@ -114,7 +114,8 @@ $ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
 
 ### Usage 
 
-Open your Internet browser and, if no errors were thrown during the installation :  
+The LevelDB database was automatically pre-populated by Dockerfile.  
+Now to use the application, open your Internet browser and if no errors were thrown during the installation :  
 The application is accessible for Windows OS at the URL:
 
 ```sh
