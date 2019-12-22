@@ -9,8 +9,6 @@
 **Promotion** - 2021  
 **Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute) 
 
-[![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
-
 ## Overview
 The project in itself is a simple web API with a dashboard composed of :
 * ##### API side  
@@ -25,6 +23,12 @@ The project in itself is a simple web API with a dashboard composed of :
     - Only access the user’s metrics, not the other ones
 * ##### Utils 
     - Pre-populate the database with at least 2 users and their own metrics
+
+## Specification
+* Continuous testing Travis CI : [![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
+* Stable release version: ![version](https://img.shields.io/badge/version-1.2.3-blue)
+
+
 
 ## Install 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
