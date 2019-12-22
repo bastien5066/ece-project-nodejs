@@ -29,7 +29,7 @@ The project in itself is a simple web API with a dashboard composed of :
 * Coverage : [![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_90.svg)](https://coveralls.io/r/boennemann/badges)
 * Stable release version: ![version](https://img.shields.io/badge/version-4.1.1-blue)
 
-## Install 
+## Installation - Without Docker 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
 To check if you have Node.js installed, run this command in your terminal: 
 
@@ -53,6 +53,39 @@ Go to the project directory and install the depedencies required for this projec
 ```sh
 $ npm install
 ```
+
+## Installation - With Docker
+
+To copy this project on Desktop :
+
+```sh
+$ git clone "https://github.com/bastien5066/ece-project-nodejs.git"
+```
+Go to the project directory and run the following command :
+
+```sh
+$ docker build -t [PROJECT-NAME] .   
+```
+
+Check if the image is mounted :
+
+```sh
+$ docker images .   
+```
+
+Now run the container : 
+
+```sh
+$ docker run -it -d -p [PORT-CHOSEN]:8080 [PROJECT-NAME]
+```
+
+Finally, open your Internet browser and enter the following URL :
+
+```sh
+http://192.168.99.100:8080/
+
+```
+
 
 ## Usage 
 
@@ -85,7 +118,7 @@ $ npm run dev
 Then, open your Internet browser and enter the following URL :
 
  ```sh
-$ http://localhost:8080/
+http://localhost:8080/
 ```
 
 ## Dependencies
