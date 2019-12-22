@@ -90,8 +90,12 @@ $ http://localhost:8080/
 ```
 
 ## Dependencies
-[![dependencies Status](https://david-dm.org/request/request/status.svg)](https://david-dm.org/request/request)
-[![devDependencies Status](https://david-dm.org/request/request/dev-status.svg)](https://david-dm.org/request/request?type=dev)
+[npm-badge]: https://img.shields.io/npm/v/{{ece-project-nodejs}}.svg
+[npm-badge-url]: https://www.npmjs.com/package/{{ece-project-nodejs}}
+[dependencies-badge]: https://img.shields.io/david/{{bastien5066}}/{{ece-project-nodejs}}.svg
+[dependencies-badge-url]: https://david-dm.org/{{bastien5066}}/{{ece-project-nodejs}}
+[devDependencies-badge]: https://img.shields.io/david/dev/{{bastien5066}}/{{ece-project-nodejs}}.svg
+[devDependencies-badge-url]: https://david-dm.org/{{bastien5066}}/{{ece-project-nodejs}}#info=devDependencies
 
 
 ## Grading 
