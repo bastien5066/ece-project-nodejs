@@ -174,7 +174,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Enjoy our program !
 
-We hope you will enjoy our application ! It was a real pleasure to develop this application !
+We hope you will enjoy our application ! It was a real pleasure to develop this application !  
 If any issues are found, let us know [here](https://github.com/bastien5066/ece-project-nodejs/issues) !  
 
 [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
