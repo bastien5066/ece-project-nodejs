@@ -7,7 +7,7 @@
 **Teachers** - Sergei KUDINOV &  Grégor JOUET  
 **Deadline** - 24/12/19  
 **Promotion** - 2021  
-**Class** - SI Inter Gr03
+**Class** - SI Inter Gr03  
 **Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute)   
 
 ## Overview
@@ -64,9 +64,9 @@ $ npm run populate
 ```
 
 The following users will be created with their own metrics :  
-* **address:** test1@email.com **username:** test1 **password:** password1   
-* **address:** test2@email.com **username:** test2 **password:** password2  
-* **address:** test3@email.com **username:** test3 **password:** password3  
+**address:** test1@email.com **username:** test1 **password:** password1   
+**address:** test2@email.com **username:** test2 **password:** password2  
+**address:** test3@email.com **username:** test3 **password:** password3  
 
 * #####  Start project - Test environment
 Go to the project directory, and run : 
@@ -95,7 +95,7 @@ http://localhost:8080/
 
 ## Installation - With Docker
 **Does not include testing with npm test** 
-**Tests must be launched without Docker : see above at 'Start project - Dev environment' section (npm install is required before launching testing at the project root)** 
+**Tests must be launched without Docker : see above at 'Start project - Dev environment' section (npm install is required before launching testing at the project root)**  
 To copy this project on Desktop :
 
 ```sh
