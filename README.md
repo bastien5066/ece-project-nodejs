@@ -2,7 +2,7 @@
 <img src="https://talentsdunumerique.com/sites/default/files/public/logo-ece-2018.jpg" height="200px">
 
 ## Information
-**ECE Paris S7** - NodeJS Project  
+**ECE Paris S7 - NodeJS Project**  
 **Courses** - Web Technology - NodeJS & DevOps-RSE  
 **Teachers** - Sergei KUDINOV &  Grégor JOUET  
 **Deadline** - 24/12/19  
@@ -44,11 +44,12 @@ To confirm that you have npm installed you can run this command in your terminal
 $ npm -v
 ```
 
-To copy this project on Desktop :
+To copy this project on your computer :
 
 ```sh
 $ git clone "https://github.com/bastien5066/ece-project-nodejs.git"
 ```
+
 Go to the project directory and install the depedencies required for this project by running the command : 
 
 ```sh
@@ -81,13 +82,13 @@ Go to the project directory, and run either :
 ```sh
 $ npm start
 ```
-or this to run NodeJS with NoDemon :
+or this command to run NodeJS with NoDemon :
 
 ```sh
 $ npm run dev
 ```
 
-Then, open your Internet browser and enter the following URL :
+Then, the application has been started and is listening and port 8080. Thus, open your Internet browser and enter the following URL :
 
  ```sh
 http://localhost:8080/
@@ -149,8 +150,9 @@ DevOps grading criterias :
 * Configuration of Travis CI
 * Docker containerisation
 * Github's branches management
-* Testing phase & compatibility with LevelDB (IO Error with LOCK)
+* Testing phase & compatibility with LevelDB 
 * Setting up the README file correctly
+* Asynchronous functions
 * Testing in containerisation : problems occured between the container and leveldb. It seemed that leveldb couldn't create and access (limited right ?) the leveldb folders that should contain users and their metrics. Below is the problem encountered in Docker Quickstart Terminal :
     ```sh
     Uncaught OpenError: IO error: ./db_test/users/LOCK: No such file or directory 
@@ -163,17 +165,17 @@ DevOps grading criterias :
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
 
 ## Acknowledgments/Sources
-* StackOverflow
 * Sergei KUDINOV
 * Grégor JOUET
+* [StackOverflow](https://stackoverflow.com/)
 * [NPM](https://www.npmjs.com/)
 * [Docker Documentation](https://docs.docker.com/)
 * [Github](https://github.com/)
 
 ## Enjoy our program !
 
-You are done ! You are free to use this application !  
-I hope you will enjoy it !
+We hope you will enjoy our application ! It was a real pleasure to develop this application !
+If any issues are found, let us know [here](https://github.com/bastien5066/ece-project-nodejs/issues) !  
 
 [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
 
