@@ -95,7 +95,7 @@ http://localhost:8080/
 ```
 
 ## Installation - With Docker
-**Does not include testing with npm test** 
+**Does not include testing with npm test**   
 **Tests must be launched without Docker : see above at 'Start project - Dev environment' section (npm install is required before launching testing at the project root)**  
 To copy this project on Desktop :
 
