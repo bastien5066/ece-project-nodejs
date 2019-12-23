@@ -1,5 +1,6 @@
 import { User, UserHandler } from '../src/user'
 import { Metric } from '../src/metrics';
+import { resolve } from 'dns';
 
 const db = new UserHandler('./db/users', './db/metrics')
 
@@ -26,15 +27,17 @@ function checkCredentials(req: any, res: any) {
             if (!err && result != null) {
                 console.log(result)
                 if (result.length != 0) {
-                    result.forEach(function (element: any) {
-                        if (element.email == req.body.user_mail) {
-                            if (bcrypt.compareSync(req.body.user_password, element.password)) {
-                                console.log("************************************LOGGEEEED*********************************");
-                                connected.push(new User(element.email, element.username, req.body.user_password, element.metrics, true));
+                    new Promise((resolve, reject) => {
+                        result.forEach(function (element: any) {
+                            if (element.email == req.body.user_mail) {
+                                if (bcrypt.compareSync(req.body.user_password, element.password)) {
+                                    console.log("************************************LOGGEEEED*********************************");
+                                    connected.push(new User(element.email, element.username, req.body.user_password, element.metrics, true));
+                                }
                             }
-                        }
-                    });
-                    setTimeout(function () {
+                        });
+                        resolve();
+                    }).then(() => {
                         console.log("CONNECTED LENGHT")
                         console.log(connected.lenght != 0)
                         if (connected.length != 0) {
@@ -44,8 +47,7 @@ function checkCredentials(req: any, res: any) {
                         } else {
                             res.render('../views/homepage.ejs', { err: true, msg: "Sorry, the e-mail address and password you entered did not match any account in our records. Please check your entries and try again." });
                         }
-                    }, 500)
-
+                    });
                 } else {
                     //res.render('../views/homepage.ejs', { err: true, msg: "Sorry, the e-mail address and password you entered did not match any account in our records. Please check your entries and try again." });
                 }
@@ -142,42 +144,43 @@ function editProfile(req: any, res: any) {
         res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: true, msg: "Sorry, you didn't enter a proper e-mail address." })
     } else {
         db.getAllUser((err: Error | null, result: User[] | null) => {
-            if (!err) {
-                if (result !== null) {
+            if (err) throw err;
+            if (result !== null) {
+                new Promise((resolve, reject) => {
                     result.forEach(function (element: any) {
                         console.log(element.email)
                         console.log(req.body.user_mail)
                         console.log(req.session.user.email)
                         console.log("")
-
                         if (element.email == req.body.user_mail && req.session.user.email != req.body.user_mail) {
                             console.log("SAME ADDRESS COME ON")
                             email.push(element.email)
                         }
                     })
-                } else {
-                    console.log('callback result is null')
-                }
-
+                    resolve();
+                }).then(() => {
+                    console.log("EMAIL CHECK")
+                    console.log(email)
+                    if (email.length != 0) {
+                        res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
+                    } else {
+                        db.remove([req.session.user.email], (err: Error | null) => {
+                            if (err) throw err
+                            else {
+                                db.add([saveUser], (err: Error | null) => {
+                                    if (err) throw err
+                                    else {
+                                        console.log(newUser)
+                                        req.session.user = newUser
+                                        res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: JSON.stringify(newUser.getMetrics()), err: false, msg: "Your account has successfully been modified !" })
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
         });
-        if (email.length != 0) {
-            res.render('profile.ejs', { userEmail: req.session.user.email, userName: req.session.user.username, userPassword: req.session.user.password, userMetrics: JSON.stringify(req.session.user.metrics), err: true, msg: "Sorry, this e-mail address is already in use. Please try another e-mail." })
-        } else {
-            db.remove([req.session.user.email], (err: Error | null) => {
-                if (err) throw err
-                else {
-                    db.add([saveUser], (err: Error | null) => {
-                        if (err) throw err
-                        else {
-                            console.log(newUser)
-                            req.session.user = newUser
-                            res.render('profile.ejs', { userEmail: newUser.getEmail(), userName: newUser.getUsername(), userPassword: newUser.getPassword(), userMetrics: JSON.stringify(newUser.getMetrics()), err: false, msg: "Your account has successfully been modified !" })
-                        }
-                    });
-                }
-            });
-        }
     }
 }
 

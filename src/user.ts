@@ -16,7 +16,7 @@ export class User {
   constructor(mail: string, usr: string, psw: string, met: Metric[], passwordHashed: boolean) {
     this.email = mail
     this.username = usr
-    if(!passwordHashed) this.password = bcrypt.hashSync(psw, salt); 
+    if (!passwordHashed) this.password = bcrypt.hashSync(psw, salt);
     else this.password = psw;
     this.metrics = met
   }
@@ -53,8 +53,8 @@ export class UserHandler {
     const stream = WriteStream(this.db)
     stream.on('error', function (err) {
       callback(err)
-    }).on('close', function(err) {
-      if(err) {
+    }).on('close', function (err) {
+      if (err) {
       }
       callback(null)
     })
@@ -62,7 +62,7 @@ export class UserHandler {
       stream.write({ key: `user_${m.getEmail()}`, value: { email: m.getEmail(), username: m.getUsername(), password: m.getPassword() } })
       this.metricsDB.add(`metrics_${m.getEmail()}`, m.getMetrics(), (err: Error | null) => {
         if (err) {
-          throw err        
+          throw err
         }
 
       });
@@ -98,8 +98,8 @@ export class UserHandler {
             } else {
               users.push(new User(data.value.email, data.value.username, data.value.password, [], true))
             }
-          } 
-          if (counter == users.length) {
+          }
+          if (counter == users.length && users.length != 0) {
             callback(null, users)
           }
         });
@@ -108,8 +108,8 @@ export class UserHandler {
         callback(err, null)
       })
       .on('close', function (err) {
-        if (users.length == 0) {
-          callback(null, users)
+        if (counter == 0) {
+          callback(null, users);
         }
       })
   }
@@ -127,7 +127,7 @@ export class UserHandler {
               } else {
                 foundUser = new User(data.value.email, data.value.username, data.value.password, [], true)
               }
-            } 
+            }
             if (foundUser != undefined) {
               callback(null, foundUser)
             }
@@ -142,34 +142,35 @@ export class UserHandler {
   public remove(emailTab: string[], callback: (error: Error | null) => void) {
     let self = this.metricsDB;
     let that = this;
-    let counter = 0;
-    emailTab.forEach(function (email) {
-      that.getUser(email, (err: Error | null, result: User | null) => {
-        if (!err) {
+    let counter: number = 0;
+    new Promise((resolve, reject) => {
+      emailTab.forEach(function (email) {
+        that.getUser(email, (err: Error | null, result: User | null) => {
+          if (err) throw err
           if (result != undefined && result != null) {
             let metrics: Metric[] = result.getMetrics()
             that.db.del(`user_${result.getEmail()}`, function (err) {
-              if (err) {
-                callback(err)
+              if (err) throw err
+              if (metrics.length > 0) {
+                self.del('metrics_' + email, metrics, (err: Error | null, result: Metric[] | null) => {
+                  if (err) throw err
+                });
+              } else {
+                self.del('metrics_' + email, [], (err: Error | null, result: Metric[] | null) => {
+                  if (err) throw err
+                });
               }
-              else {
-                if (metrics.length > 0) {
-                  self.del('metrics_' + email, metrics, (err: Error | null, result: Metric[] | null) => {
-                    if (err) throw err
-                  });
-                } else {
-                  self.del('metrics_' + email, [], (err: Error | null, result: Metric[] | null) => {
-                    if (err) throw err
-                  });
-                }
-              }
+              counter+=1;
+              if(counter == emailTab.length) {
+                resolve();
+              }           
             });
-            callback(null)
           }
-        } else {
-          callback(err)
-        };
-      });
+        });
+      })
+
+    }).then(() => {
+      callback(null);
     })
 
   }

@@ -175,6 +175,9 @@
                                 function refreshUpdate(path) {
                                     $("#metrics-update").empty();
                                     var request = $.getJSON(path, function(data) {
+                                        tabChart = refreshChart(data, simpleChart, IMCChart)
+                                        simpleChart = tabChart[0];
+                                        IMCChart = tabChart[1];
                                         var txt = '';
                                         data.forEach(function(element) {
                                             txt += ' <form id="' + element.timestamp + '" action="/user/<%= userName %>/metrics/update/metrics_<%=userEmail%>_' + element.timestamp + '" method="POST">' +

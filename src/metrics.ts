@@ -149,7 +149,7 @@ export class MetricsHandler {
         callback(err, null)
       })
       .on('close', function () {
-        callback(null, metrics)
+          callback(null, metrics)       
       })
   }
 

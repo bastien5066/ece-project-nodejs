@@ -17,7 +17,7 @@ function setDataIMCChart(metricsSent, chartRef) {
     const settingsChart = {
         colorChart: ["red", "blue"],
         titleDisplay: true,
-        titleChart: "Evolution of your IMC (weight(kg)/height²(m)) through time",
+        titleChart: "Evolution of your BMI (weight(kg)/height²(m)) through time",
         titleFontColor: "black",
         titleFontFamily: "Impact",
         titleFontSize: "18",
