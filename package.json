@@ -1,7 +1,7 @@
 {
     "name": "ece-project-nodejs",
     "version": "1.0.0",
-    "description": "ECE Paris - NodeJS Project ",
+    "description": "ECE Paris - NodeJS Project",
     "main": "server.ts",
     "scripts": {
         "build": "./node_modules/.bin/tsc -p tsconfig.json",
@@ -15,7 +15,7 @@
         "url": "git+https://github.com/bastien5066/ece-project-nodejs.git"
     },
     "author": "Bastien LE GUERN Matthieu LELEU",
-    "license": "SEE LICENSE IN LICENSILE FILE",
+    "license": "SEE LICENSE IN LICENSE FILE",
     "bugs": {
         "url": "https://github.com/bastien5066/ece-project-nodejs/issues"
     },

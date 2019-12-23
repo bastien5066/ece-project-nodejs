@@ -11,4 +11,5 @@ const db = new UserHandler('./db/users', './db/metrics')
 
 db.add(usr, (err: Error | null) => {
   if (err) throw err
+  else console.log("Data populated !")
 });
