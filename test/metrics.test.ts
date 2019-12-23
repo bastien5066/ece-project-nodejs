@@ -3,6 +3,7 @@ import { User, UserHandler } from '../src/user'
 import { Metric, MetricsHandler } from '../src/metrics'
 import { LevelDB } from "../src/leveldb"
 import { on } from 'cluster'
+import { resolve } from 'dns'
 
 const dbPath: string = './db_test/'
 const dbPathMetrics: string = './db_test/metrics'
@@ -135,16 +136,20 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                         resolve()
                     });
                 }).then(() => {
-                    dbMet.del('metrics', metrics, (err: Error | null) => {
-                        console.log('')
-                        expect(err).to.be.null;
-                    });
-                }).then(() => {
-                    dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
-                        expect(err).to.be.null;
-                        expect(result).to.not.be.undefined;
-                        expect(result).to.be.empty;
-                        done()
+                    new Promise((resolve, reject) => {
+                        dbMet.del('metrics', metrics, (err: Error | null) => {
+                            setTimeout(function(){
+                                expect(err).to.be.null;
+                                resolve();
+                            },200)                           
+                        });
+                    }).then(() => {
+                        dbMet.getAllMetrics('metrics', (err: Error | null, result?: Metric[] | null) => {
+                            expect(err).to.be.null;
+                            expect(result).to.not.be.undefined;
+                            expect(result).to.be.empty;
+                            done()
+                        });
                     });
                 });
             });
@@ -356,7 +361,7 @@ describe('----------------- METRICS TEST & USER TEST-----------------', function
                     });
                 }).then(() => {
                     dbUser.getAllUser((err: Error | null, result?: User[] | null) => {
-                        expect(err).to.be.null;                        
+                        expect(err).to.be.null;
                         expect(result).to.not.be.undefined;
                         expect(result).to.be.empty;
                         done()
