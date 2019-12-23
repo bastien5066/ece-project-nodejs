@@ -7,6 +7,7 @@
 **Teachers** - Sergei KUDINOV &  Grégor JOUET  
 **Deadline** - 24/12/19  
 **Promotion** - 2021  
+**Class** - SI Inter Gr03
 **Contributors** - [Bastien LE GUERN](https://github.com/bastien5066) [Matthieu LELEU](https://github.com/Leleute)   
 
 ## Overview
@@ -27,7 +28,7 @@ The project in itself is a simple web API with a dashboard composed of :
 ## Specification
 * Continuous testing Travis CI : [![Build Status](https://travis-ci.org/bastien5066/ece-project-nodejs.svg?branch=master)](https://travis-ci.org/bastien5066/ece-project-nodejs)
 * Coverage : [![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_90.svg)](https://coveralls.io/r/boennemann/badges)
-* Stable release version: ![version](https://img.shields.io/badge/version-4.4.2-blue)
+* Stable release version: ![version](https://img.shields.io/badge/version-4.4.3-blue)
 
 ## Installation - Without Docker 
 This project uses node and npm. Go check them out if you don't have them locally installed.    
@@ -63,9 +64,9 @@ $ npm run populate
 ```
 
 The following users will be created with their own metrics :  
-**address:** test1@email.com **username:** test1 **password:** password1   
-**address:** test2@email.com **username:** test2 **password:** password2  
-**address:** test3@email.com **username:** test3 **password:** password3  
+* **address:** test1@email.com **username:** test1 **password:** password1   
+* **address:** test2@email.com **username:** test2 **password:** password2  
+* **address:** test3@email.com **username:** test3 **password:** password3  
 
 * #####  Start project - Test environment
 Go to the project directory, and run : 
@@ -93,22 +94,17 @@ http://localhost:8080/
 ```
 
 ## Installation - With Docker
-**Does not include testing with npm test**  
+**Does not include testing with npm test** 
+**Tests must be launched without Docker : see above at 'Start project - Dev environment' section (npm install is required before launching testing at the project root)** 
 To copy this project on Desktop :
 
 ```sh
 $ git clone "https://github.com/bastien5066/ece-project-nodejs.git"
 ```
-Go to the project directory and run the following command :
+Go to the project directory and run the following command to build the container :
 
 ```sh
 $ docker build -t [PROJECT-NAME] .   
-```
-
-Check if the image is mounted :
-
-```sh
-$ docker images .   
 ```
 
 Now run the container : 
@@ -166,10 +162,13 @@ DevOps grading criterias :
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)  
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/bastien5066/ece-project-nodejs/blob/master/LICENSE) file for details
 
-## Acknowledgments
+## Acknowledgments/Sources
 * StackOverflow
 * Sergei KUDINOV
 * Grégor JOUET
+* [NPM](https://www.npmjs.com/)
+* [Docker Documentation](https://docs.docker.com/)
+* [Github](https://github.com/)
 
 ## Enjoy our program !
 
