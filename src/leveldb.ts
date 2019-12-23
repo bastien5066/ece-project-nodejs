@@ -1,3 +1,6 @@
+/*
+  leveldb.ts : LevelDB class to handle the connections and to clear the paths
+*/
 import encoding from 'encoding-down'
 import leveldown from 'leveldown'
 import levelup from 'levelup'

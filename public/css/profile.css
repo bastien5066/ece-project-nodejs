@@ -1,461 +1,466 @@
-    body {
-        background-image: url("https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/383690/f7a121a3f7a929ffb4dbc3ae241b3b4b6eaaed1d.jpg");
-        background-attachment: fixed;
-        background-size: auto 105%;
-        margin: 0 auto;
-        margin-bottom: 2%;
-    }
-    
-    .title {
-        text-align: center;
-        margin: 0 auto;
-        margin-bottom: 5%;
-    }
-    
-    #title {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 3em;
-        text-shadow: 1px 2px 2px white;
-        letter-spacing: 5px;
-    }
-    
-    .txt-highlight {
-        color: red;
-    }
-    
-    .header-option {
-        display: flex;
-        width: 50%;
-        margin: 0 auto;
-    }
-    
-    .profile,
-    .metrics {
-        text-align: center;
-        width: 70%;
-        margin: 0 auto;
-        margin-top: 0%;
-    }
-    
-    .metrics .header,
-    .profile .header {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 2em;
-        cursor: pointer;
-    }
-    
-    .profile {
-        background-color: black;
-        border: 2px white solid;
-        border-radius: 30px;
-    }
-    
-    .metrics {
-        background-color: white;
-        border: 2px black solid;
-        border-radius: 30px;
-    }
-    
-    .profile .header {
-        color: white;
-    }
-    
-    .metrics .header {
-        color: black;
-    }
-    
-    .metrics:hover~#metrics,
-    .profile:hover~#profile {
-        color: white;
-    }
-    
-    .topnav {
-        background-color: black;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        overflow: hidden;
-        margin-bottom: 2%;
-        border-bottom: 2px white solid;
-        height: 70px;
-        left: 0;
-        top: 0;
-    }
-    
-    .topnav a {
-        float: left;
-        height: 100%;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px white solid;
-        height: 100%;
-        padding: 0 3% 0 3%;
-        text-align: center;
-        text-decoration: none;
-        font-size: 1.5em;
-        margin: 0 auto;
-    }
-    
-    .topnav a span {
-        vertical-align: middle;
-    }
-    
-    .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-    
-    .topnav a.active {
-        background-image: url('https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif');
-        float: right;
-        color: white;
-    }
-    
-    .topnav a.active:hover {
-        background-image: none;
-        background-color: red;
-    }
-    
-    .logo {
-        margin: 0 auto;
-        margin: 10px;
-        float: left;
-    }
-    
-    #logo-img {
-        width: 40px;
-        height: 40px;
-        vertical-align: middle;
-    }
-    
-    #logo {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 1.7em;
-        text-shadow: 1px 2px 2px white;
-        letter-spacing: 5px;
-    }
-    
-    .option {
-        display: flex;
-        width: 50%;
-        margin: 0 auto;
-        margin-top: 5%;
-    }
-    
-    .profile-form,
-    .metrics-action,
-    .metrics-create,
-    .metrics-read,
-    .metrics-update,
-    .metrics-delete {
-        display: none;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    }
-    
-    .metrics-action,
-    .metrics-create,
-    .metrics-read,
-    .metrics-update,
-    .metrics-delete {
-        width: 80%;
-        color: black;
-        background-color: white;
-        border: 2px black solid;
-        border-radius: 30px;
-        margin: 0 auto;
-    }
-    
-    .profile-form {
-        width: 50%;
-        color: white;
-        background-color: black;
-        border: 2px white solid;
-        border-radius: 30px;
-        margin: 0 auto;
-    }
-    
-    .form-title {
-        margin-bottom: 5%;
-    }
-    
-    #form-title-white {
-        border-bottom: 0.2em white solid;
-    }
-    
-    #form-title-black {
-        border-bottom: 0.2em black solid;
-    }
-    
-    .form-title-txt {
-        font-size: 1.5em;
-    }
-    
-    .form-info {
-        margin: 5% 5% 5% 5%;
-        text-align: center;
-    }
-    
-    .form-ico {
-        vertical-align: middle;
-        height: 30px;
-        margin-right: 1%;
-    }
-    
-    #reverse-ico {
-        filter: invert(100%);
-    }
-    
-    .form-submit {
-        margin-top: 5%;
-        font-size: 1.3em;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        border: none;
-        cursor: pointer;
-    }
-    
-    .form-element {
-        margin-top: 5%;
-    }
-    
-    .form-element input {
-        color: red;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 1em;
-        min-width: 70px;
-        margin-right: 0.5em;
-    }
-    
-    #form-button-metrics {
-        background-color: black;
-        color: white;
-    }
-    
-    #form-button-profile {
-        background-color: white;
-        color: black;
-    }
-    
-    #form-button-profile:hover,
-    #form-button-metrics:hover {
-        background-color: blue
-    }
-    
-    #form-button-profile:hover {
-        color: white;
-    }
-    
-    #password,
-    #confirm_password {
-        background-image: url("../img/no-visibility.png");
-        background-size: 15% 100%;
-        background-repeat: no-repeat;
-        background-position-x: right;
-    }
-    
-    .msg-error,
-    .msg-success {
-        text-align: center;
-        width: 50%;
-        color: white;
-        margin: 0 auto;
-        margin-top: 5%;
-        border: 5px white solid;
-    }
-    
-    .msg-success {
-        background-color: green;
-    }
-    
-    .msg-error {
-        background-color: red;
-    }
-    
-    .msg-error-txt,
-    .msg-success-txt {
-        padding: 3%;
-        font-size: 1.3em;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    }
-    
-    .btn-choice {
-        width: 50px;
-        outline: none;
-        height: 50px;
-        background: none;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 1em;
-        margin-right: 1%;
-        margin-left: 1%;
-        border: none;
-        background-size: cover;
-    }
-    
-    .btn-choice:hover {
-        cursor: pointer;
-        width: 60px;
-        height: 60px;
-    }
-    
-    #btn-read {
-        background-image: url('../img/btn-read.png');
-        display: none;
-    }
-    
-    #btn-create {
-        background-image: url('../img/btn-create.png');
-        display: none;
-    }
-    
-    #btn-delete {
-        background-image: url('../img/btn-delete.png');
-        display: none;
-    }
-    
-    #btn-update {
-        background-image: url('../img/btn-update.png');
-        display: none;
-    }
-    
-    #btn-settings {
-        background-image: url('../img/btn-settings.png');
-    }
-    
-    .rotate {
-        -webkit-transform: rotate(360deg);
-        -webkit-transition-duration: 1s;
-    }
-    
-    .option-metrics {
-        display: flex;
-        width: 50%;
-        margin: 0 auto;
-        margin-top: 2%;
-    }
-    
-    #option-metrics-create,
-    #option-metrics-read,
-    #option-metrics-update,
-    #option-metrics-delete {
-        color: white;
-        border: 2px white solid;
-    }
-    
-    #option-metrics-create {
-        background-color: green;
-    }
-    
-    #option-metrics-read {
-        background-color: #FFBF00;
-    }
-    
-    #option-metrics-update {
-        background-color: #008B8B;
-    }
-    
-    #option-metrics-delete {
-        background-color: red;
-    }
-    
-    #filter {
-        text-align: center;
-        padding-top: 1em;
-    }
-    
-    #filter input {
-        display: inline-block;
-        margin: 0 auto;
-        padding: 0.5em 1em 0.5em 1em;
-    }
-    
-    #hide {
-        vertical-align: middle;
-        margin-left: 1em
-    }
-    
-    #txt-title {
-        color: turquoise;
-        margin: 1% 1% 1% 1%;
-    }
-    
-    #search-update,
-    #search-delete {
-        background: url("../img/search.png");
-        vertical-align: middle;
-        margin-left: 1%;
-        width: 30px;
-        height: 30px;
-        border: none;
-        background-size: 30px 30px;
-        filter: invert(100%);
-    }
-    
-    #printForm input {
-        margin-left: 1em
-    }
-    
-    #search-delete:hover,
-    #search-update:hover {
-        cursor: pointer;
-    }
-    
-    #hide-delete,
-    #hide-update {
-        vertical-align: middle;
-        margin-left: 0.5em;
-        filter: invert(100%);
-    }
-    
-    .trash {
-        vertical-align: middle;
-        margin-left: 0.5em;
-    }
-    
-    .trash:hover {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .trash:hover,
-    #hide-delete:hover,
-    #hide-update:hover {
-        cursor: pointer;
-    }
-    
-    .update-field {
-        width: 40px;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    }
-    
-    .btn-update {
-        background: url("../img/update.png");
-        width: 30px;
-        border: none;
-        vertical-align: middle;
-        margin-left: 0.5em;
-        height: 30px;
-        background-size: 30px 30px;
-    }
-    
-    .btn-update:hover {
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        background-size: 40px 40px;
-    }
-    
-    .chart {
-        margin-bottom: 5%;
-    }
-    
-    #idfilter_height_delete,
-    #idfilter_weight_delete,
-    #idfilter_height_update,
-    #idfilter_weight_update {
-        width: 70px;
-    }
-    
-    #setFilterDelete input,
-    #setFilterUpdate input {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        color: green;
-    }
+/*
+    profile.css : define the style for the profile view defined by homepage.ejs that can be found in /views/profile.ejs
+    Set the style for the UI of the profile which includes their profile, their metrics, their buttons, the error messages, etc
+*/
+
+body {
+    background-image: url("https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/383690/f7a121a3f7a929ffb4dbc3ae241b3b4b6eaaed1d.jpg");
+    background-attachment: fixed;
+    background-size: auto 105%;
+    margin: 0 auto;
+    margin-bottom: 2%;
+}
+
+.title {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 5%;
+}
+
+#title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3em;
+    text-shadow: 1px 2px 2px white;
+    letter-spacing: 5px;
+}
+
+.txt-highlight {
+    color: red;
+}
+
+.header-option {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.profile,
+.metrics {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 0%;
+}
+
+.metrics .header,
+.profile .header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.profile {
+    background-color: black;
+    border: 2px white solid;
+    border-radius: 30px;
+}
+
+.metrics {
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 30px;
+}
+
+.profile .header {
+    color: white;
+}
+
+.metrics .header {
+    color: black;
+}
+
+.metrics:hover~#metrics,
+.profile:hover~#profile {
+    color: white;
+}
+
+.topnav {
+    background-color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    overflow: hidden;
+    margin-bottom: 2%;
+    border-bottom: 2px white solid;
+    height: 70px;
+    left: 0;
+    top: 0;
+}
+
+.topnav a {
+    float: left;
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px white solid;
+    height: 100%;
+    padding: 0 3% 0 3%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: 0 auto;
+}
+
+.topnav a span {
+    vertical-align: middle;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-image: url('https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif');
+    float: right;
+    color: white;
+}
+
+.topnav a.active:hover {
+    background-image: none;
+    background-color: red;
+}
+
+.logo {
+    margin: 0 auto;
+    margin: 10px;
+    float: left;
+}
+
+#logo-img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+#logo {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.7em;
+    text-shadow: 1px 2px 2px white;
+    letter-spacing: 5px;
+}
+
+.option {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.profile-form,
+.metrics-action,
+.metrics-create,
+.metrics-read,
+.metrics-update,
+.metrics-delete {
+    display: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.metrics-action,
+.metrics-create,
+.metrics-read,
+.metrics-update,
+.metrics-delete {
+    width: 80%;
+    color: black;
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+
+.profile-form {
+    width: 50%;
+    color: white;
+    background-color: black;
+    border: 2px white solid;
+    border-radius: 30px;
+    margin: 0 auto;
+}
+
+.form-title {
+    margin-bottom: 5%;
+}
+
+#form-title-white {
+    border-bottom: 0.2em white solid;
+}
+
+#form-title-black {
+    border-bottom: 0.2em black solid;
+}
+
+.form-title-txt {
+    font-size: 1.5em;
+}
+
+.form-info {
+    margin: 5% 5% 5% 5%;
+    text-align: center;
+}
+
+.form-ico {
+    vertical-align: middle;
+    height: 30px;
+    margin-right: 1%;
+}
+
+#reverse-ico {
+    filter: invert(100%);
+}
+
+.form-submit {
+    margin-top: 5%;
+    font-size: 1.3em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.form-element {
+    margin-top: 5%;
+}
+
+.form-element input {
+    color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1em;
+    min-width: 70px;
+    margin-right: 0.5em;
+}
+
+#form-button-metrics {
+    background-color: black;
+    color: white;
+}
+
+#form-button-profile {
+    background-color: white;
+    color: black;
+}
+
+#form-button-profile:hover,
+#form-button-metrics:hover {
+    background-color: blue
+}
+
+#form-button-profile:hover {
+    color: white;
+}
+
+#password,
+#confirm_password {
+    background-image: url("../img/no-visibility.png");
+    background-size: 15% 100%;
+    background-repeat: no-repeat;
+    background-position-x: right;
+}
+
+.msg-error,
+.msg-success {
+    text-align: center;
+    width: 50%;
+    color: white;
+    margin: 0 auto;
+    margin-top: 5%;
+    border: 5px white solid;
+}
+
+.msg-success {
+    background-color: green;
+}
+
+.msg-error {
+    background-color: red;
+}
+
+.msg-error-txt,
+.msg-success-txt {
+    padding: 3%;
+    font-size: 1.3em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.btn-choice {
+    width: 50px;
+    outline: none;
+    height: 50px;
+    background: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1em;
+    margin-right: 1%;
+    margin-left: 1%;
+    border: none;
+    background-size: cover;
+}
+
+.btn-choice:hover {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+}
+
+#btn-read {
+    background-image: url('../img/btn-read.png');
+    display: none;
+}
+
+#btn-create {
+    background-image: url('../img/btn-create.png');
+    display: none;
+}
+
+#btn-delete {
+    background-image: url('../img/btn-delete.png');
+    display: none;
+}
+
+#btn-update {
+    background-image: url('../img/btn-update.png');
+    display: none;
+}
+
+#btn-settings {
+    background-image: url('../img/btn-settings.png');
+}
+
+.rotate {
+    -webkit-transform: rotate(360deg);
+    -webkit-transition-duration: 1s;
+}
+
+.option-metrics {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 2%;
+}
+
+#option-metrics-create,
+#option-metrics-read,
+#option-metrics-update,
+#option-metrics-delete {
+    color: white;
+    border: 2px white solid;
+}
+
+#option-metrics-create {
+    background-color: green;
+}
+
+#option-metrics-read {
+    background-color: #FFBF00;
+}
+
+#option-metrics-update {
+    background-color: #008B8B;
+}
+
+#option-metrics-delete {
+    background-color: red;
+}
+
+#filter {
+    text-align: center;
+    padding-top: 1em;
+}
+
+#filter input {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+#hide {
+    vertical-align: middle;
+    margin-left: 1em
+}
+
+#txt-title {
+    color: turquoise;
+    margin: 1% 1% 1% 1%;
+}
+
+#search-update,
+#search-delete {
+    background: url("../img/search.png");
+    vertical-align: middle;
+    margin-left: 1%;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-size: 30px 30px;
+    filter: invert(100%);
+}
+
+#printForm input {
+    margin-left: 1em
+}
+
+#search-delete:hover,
+#search-update:hover {
+    cursor: pointer;
+}
+
+#hide-delete,
+#hide-update {
+    vertical-align: middle;
+    margin-left: 0.5em;
+    filter: invert(100%);
+}
+
+.trash {
+    vertical-align: middle;
+    margin-left: 0.5em;
+}
+
+.trash:hover {
+    width: 40px;
+    height: 40px;
+}
+
+.trash:hover,
+#hide-delete:hover,
+#hide-update:hover {
+    cursor: pointer;
+}
+
+.update-field {
+    width: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.btn-update {
+    background: url("../img/update.png");
+    width: 30px;
+    border: none;
+    vertical-align: middle;
+    margin-left: 0.5em;
+    height: 30px;
+    background-size: 30px 30px;
+}
+
+.btn-update:hover {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+}
+
+.chart {
+    margin-bottom: 5%;
+}
+
+#idfilter_height_delete,
+#idfilter_weight_delete,
+#idfilter_height_update,
+#idfilter_weight_update {
+    width: 70px;
+}
+
+#setFilterDelete input,
+#setFilterUpdate input {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: green;
+}

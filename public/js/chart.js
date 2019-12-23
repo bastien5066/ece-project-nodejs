@@ -1,7 +1,13 @@
+/* 
+    chart.js : JS file which handle the displaying of graphs and their data
+*/
+
+//Function to refresh the chart with the new metrics that are received
 function refreshChart(newMetrics, simpleChart, IMCChart) {
     return [setDataSimpleChart(newMetrics, simpleChart), setDataIMCChart(newMetrics, IMCChart)];
 }
 
+//Function to set the content of BMI chart
 function setDataIMCChart(metricsSent, chartRef) {
     var dataChart = {
         firstData: [],
@@ -46,6 +52,7 @@ function setDataIMCChart(metricsSent, chartRef) {
     return chart;
 }
 
+//Function to set the content of the Height/Weight chart
 function setDataSimpleChart(metricsSent, chartRef) {
     var dataChart = {
         firstData: [],
@@ -92,7 +99,7 @@ function setDataSimpleChart(metricsSent, chartRef) {
     return chart;
 }
 
-
+//Function to draw the chart sent in parameter with his settings
 function drawChart(chartName, chartRef, type, labelsChart, dataChart, typeChart, settingsChart) {
     if (dataChart.secondData != undefined) {
         var data = {

@@ -1,9 +1,12 @@
+/**
+ * metrics.test.ts : TypeScript test file
+ * Handle all the tests with mocha and chai
+ */
+
 import { expect } from 'chai'
 import { User, UserHandler } from '../src/user'
 import { Metric, MetricsHandler } from '../src/metrics'
 import { LevelDB } from "../src/leveldb"
-import { on } from 'cluster'
-import { resolve } from 'dns'
 
 const dbPath: string = './db_test/'
 const dbPathMetrics: string = './db_test/metrics'

@@ -1,3 +1,8 @@
+/*
+    homepage.css : define the style for the homepage view defined by homepage.ejs that can be found in /views/homepage.ejs
+    Set the style for the UI of the homepage which includes the Sign In/Sign Up button, the authentification, the error messages, etc
+*/
+
 body {
     background-image: url("https://i.pinimg.com/originals/f3/8e/18/f38e1822bbfa446f9ccc75a875c454be.gif");
     background-attachment: fixed;

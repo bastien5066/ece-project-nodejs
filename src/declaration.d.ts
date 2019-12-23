@@ -1,3 +1,7 @@
+/*
+    declaration.d.ts : declaration file for TypeScript dependencies
+*/
+
 declare module 'encoding-down'
 declare module 'leveldown'
 declare module 'levelup'

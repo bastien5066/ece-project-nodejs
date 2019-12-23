@@ -1,3 +1,7 @@
+/*
+    homepage.js : jQuery file to handle the different events that occur in the homepage.ejs (on the website's homepage)
+*/
+
 $(document).ready(function() {
     $(".sign-up").click(function() {
         $('.sign-in').toggle(500);

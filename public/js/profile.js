@@ -1,3 +1,7 @@
+/*
+    profile.js : jQuery file to handle the different events that occur in the profile.ejs (on the user's profile)
+*/
+
 $(document).ready(function() {
     $(".title").fadeTo(5000, 0.001, function() {
         $(this).slideUp(500, function() {
