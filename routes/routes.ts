@@ -147,8 +147,7 @@ function deleteProfile(req: any, res: any) {
  * @param res 
  */
 function editProfile(req: any, res: any) {
-    let email: any = [];
-    let previousEmail: any = req.session.user.email;
+    let email: any = []
     let saveUser: User = new User(req.body.user_mail, req.body.user_name, req.body.user_password, [], false)
     req.session.user.metrics.forEach(function (data) {
         saveUser.addMetric(new Metric(data.timestamp, data.height, data.weight));
