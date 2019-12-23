@@ -142,7 +142,7 @@ NodeJS grading criterias : [here](https://github.com/adaltas/ece-nodejs/blob/201
 DevOps grading criterias : 
 - Use git, use branches, use tags 
 - Project must have tests with a testing framework (depending on the language used)
-- Project uses external dependencies such as a database, use docker-compose to start it before the test session.
+- If project uses external dependencies such as a database, use docker-compose to start it before the test session.
 - Configure your project to use a CI server
 - Provide a "README" file explaining how to launch the project, how to launch the tests, what problems your had
 
